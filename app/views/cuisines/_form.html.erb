@@ -1,0 +1,15 @@
+<%= form_for @cuisine do |f| %>
+  <div>
+    <%= f.label :name, 'Nome' %>
+    <%= f.text_field :name %>
+  </div>
+  <%= f.submit 'Enviar'  %>
+<% end %>
+
+<% if @cuisine.errors.any? %>
+    <ul>
+    <% @cuisine.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+<% end %>

@@ -6,18 +6,23 @@ class RecipesController < ApplicationController
   def new
     @recipe = Recipe.new
     @cuisines = Cuisine.all
+    @recipe_types = RecipeType.all
   end
 
   def create
     @recipe = Recipe.create(recipe_params)
-    redirect_to @recipe
+    if @recipe.save
+      redirect_to @recipe
+    else
+      render 'new'
+    end
   end
 
 
   private
 
   def recipe_params
-    params.require(:recipe).permit(:title, :recipe_type, :cuisine_id, :difficulty,
-      :cook_time, :ingredients, :method)
+    params.require(:recipe).permit(:title, :recipe_type_id, :cuisine_id,
+      :difficulty, :cook_time, :ingredients, :method)
   end
 end

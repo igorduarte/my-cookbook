@@ -1,0 +1,15 @@
+<%= form_for @recipe_type do |f| %>
+<div>
+  <%= f.label :recipe_type_id, 'Tipo da Receita' %>
+  <%= f.collection_select :recipe_type_id, @recipe_types, :id, :name %>
+</div>
+  <%= f.submit 'Enviar'  %>
+<% end %>
+
+<% if @recipe_type.errors.any? %>
+    <ul>
+    <% @recipe_type.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+<% end %>
