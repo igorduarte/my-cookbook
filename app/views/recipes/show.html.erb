@@ -1,7 +1,7 @@
 <h1><%= @recipe.title %></h1>
 <h3>Detalhes</h3>
 <p><b>Prato:</b> <%= @recipe.recipe_type %></p>
-<p><b>Cozinha de origem:</b> <%= @recipe.cuisine %></p>
+<p><b>Cozinha de origem:</b> <%= @recipe.cuisine.name %></p>
 <p><b>Dificuldade:</b> <%= @recipe.difficulty %></p>
 <p><b>Tempo de preparo:</b> <%= @recipe.cook_time %> minutos</p>
 <h3>Ingredientes</h3>
