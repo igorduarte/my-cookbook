@@ -18,7 +18,6 @@ class CuisinesController < ApplicationController
   end
 
 
-
   private
 
   def cuisine_params
