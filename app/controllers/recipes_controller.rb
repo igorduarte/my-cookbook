@@ -9,6 +9,10 @@ class RecipesController < ApplicationController
     @recipe_types = RecipeType.all
   end
 
+  def edit
+    @recipe = Recipe.find(params[:id])
+  end
+
   def create
     @recipe = Recipe.create(recipe_params)
     if @recipe.save
@@ -18,6 +22,15 @@ class RecipesController < ApplicationController
     end
   end
 
+  def update
+  @recipe = Recipe.find(params[:id])
+
+  if @recipe.update(recipe_params)
+    redirect_to @recipe
+  else
+    render 'edit'
+  end
+end
 
   private
 
