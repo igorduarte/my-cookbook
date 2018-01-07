@@ -1,0 +1,19 @@
+<div class="col-md-7">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <%= form_tag("/search", method: :get, class: "navbar-form navbar-left") do %>
+        <div class="form-group">
+          <%= text_field_tag(:term, nil, class: "form-control", id: "Busca") %>
+          <%= submit_tag("Buscar", class: "btn btn-default") %>
+        </div>
+      <% end %>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to 'Início', root_path %></li>
+        <li><%= link_to 'Enviar uma receita', new_recipe_path %></li>
+        <li><%= link_to 'Cadastrar uma cozinha', new_cuisine_path %></li>
+        <li><%= link_to 'Cadastrar um tipo de receita', new_recipe_type_path %></li>
+      </ul>
+    </div>
+  </nav>
+</div>
