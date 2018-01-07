@@ -1,12 +1,13 @@
 <h1><%= @recipe.title %></h1>
 <h3>Detalhes</h3>
-<p><b>Prato:</b> <%= @recipe.recipe_type.name %></p>
-<p><b>Cozinha de origem:</b> <%= @recipe.cuisine.name %></p>
-<p><b>Dificuldade:</b> <%= @recipe.difficulty %></p>
-<p><b>Tempo de preparo:</b> <%= @recipe.cook_time %> minutos</p>
+<p><strong>Prato:</strong> <%= @recipe.recipe_type.name %></p>
+<p><strong>Cozinha de origem:</strong> <%= @recipe.cuisine.name %></p>
+<p><strong>Dificuldade:</strong> <%= @recipe.difficulty %></p>
+<p><strong>Tempo de preparo:</strong> <%= @recipe.cook_time %> minutos</p>
 <h3>Ingredientes</h3>
 <p><%= @recipe.ingredients %></p>
 <h3>Como Preparar</h3>
 <p><%= @recipe.method %></p>
 
-<%= link_to "Voltar", root_path %> | <%= link_to "Editar", edit_recipe_path(@recipe) %>
+<%= link_to "Voltar", root_path, class: "btn btn-default" %>
+<%= link_to "Editar", edit_recipe_path(@recipe), class: "btn btn-default" %>

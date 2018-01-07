@@ -1,40 +1,56 @@
 <%= form_for @recipe do |f| %>
-  <div>
-    <%= f.label :title, 'Título' %>
-    <%= f.text_field :title %>
+  <div class="row">
+    <div class="form-group col-md-2">
+      <%= f.label :title, 'Título' %>
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
   </div>
-  <div>
-    <%= f.label :recipe_type_id, 'Tipo da Receita' %>
-    <%= f.collection_select :recipe_type_id, RecipeType.all, :id, :name %>
+  <div class="row">
+    <div class="form-group col-md-2">
+      <%= f.label :recipe_type_id, 'Tipo da Receita' %>
+      <%= f.collection_select :recipe_type_id, @recipe_types, :id, :name,
+        { include_blank: false }, {class: "form-control"} %>
+    </div>
   </div>
-  <div>
-    <%= f.label :cuisine_id, 'Cozinha' %>
-    <%= f.collection_select :cuisine_id, Cuisine.all, :id, :name %>
+  <div class="row">
+    <div class="form-group col-md-2">
+      <%= f.label :cuisine_id, 'Cozinha' %>
+      <%= f.collection_select :cuisine_id, @cuisines, :id, :name,
+        { include_blank: false }, {class: "form-control"} %>
+    </div>
   </div>
-  <div>
-    <%= f.label :difficulty, 'Dificuldade' %>
-    <%= f.text_field :difficulty %>
+  <div class="row">
+    <div class="form-group col-md-2">
+      <%= f.label :difficulty, 'Dificuldade' %>
+      <%= f.text_field :difficulty, class: "form-control" %>
+    </div>
   </div>
-  <div>
-    <%= f.label :cook_time, 'Tempo de Preparo' %>
-    <%= f.text_field :cook_time %>
+  <div class="row">
+    <div class="form-group col-md-2">
+      <%= f.label :cook_time, 'Tempo de Preparo' %>
+      <%= f.text_field :cook_time, class: "form-control" %>
+    </div>
   </div>
-  <div>
-    <%= f.label :ingredients, 'Ingredientes' %>
-    <%= f.text_area :ingredients %>
+  <div class="row">
+    <div class="form-group col-md-2">
+      <%= f.label :ingredients, 'Ingredientes' %>
+      <%= f.text_area :ingredients, class: "form-control" %>
+    </div>
   </div>
-  <div>
-    <%= f.label :method, 'Como Preparar' %>
-    <%= f.text_area :method %>
+  <div class="row">
+    <div class="form-group col-md-2">
+      <%= f.label :method, 'Como Preparar' %>
+      <%= f.text_area :method, class: "form-control" %>
+    </div>
   </div>
+  <%= link_to "Voltar", root_path, class: "btn btn-default" %>
+  <%= f.submit 'Enviar', class: "btn btn-default" %>
+  <% end %>
 
-  <%= f.submit 'Enviar'  %>
-<% end %>
-
-<% if @recipe.errors.any? %>
-    <ul>
+  <% if @recipe.errors.any? %>
+  <ul>
     <% @recipe.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
-    </ul>
+  </ul>
 <% end %>

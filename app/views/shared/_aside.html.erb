@@ -1,4 +1,4 @@
-<div class="col-md-5">
+<aside class="col-md-2">
   <h2>Tipo</h2>
   <% @recipe_types.each do |recipe_types| %>
     <li><%= link_to recipe_types.name, recipe_type_path(recipe_types.id)%></li>
@@ -7,4 +7,4 @@
   <% @cuisines.each do |cuisine| %>
     <li><%= link_to cuisine.name, cuisine_path(cuisine.id)%></li>
   <% end %>
-</div>
+</aside>
