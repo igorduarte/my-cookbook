@@ -4,16 +4,16 @@
     <p>Bem-vindo ao maior livro de receitas online</p>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-7">
     <nav class="navbar navbar-default" role="navigation">
-
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-        </button>
-      </div>
-
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <%= form_tag("/search", method: :get, class: "navbar-form navbar-left") do %>
+          <div class="form-group">
+            <%= text_field_tag(:term, nil, class: "form-control", id: "Busca") %>
+            <%= submit_tag("Buscar", class: "btn btn-default") %>
+          </div>
+        <% end %>
+
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to 'Início', root_path %></li>
           <li><%= link_to 'Enviar uma receita', new_recipe_path %></li>
@@ -36,21 +36,17 @@
       <li><%= link_to cuisine.name, cuisine_path(cuisine.id)%></li>
     <% end %>
   </div>
+
   <div class="col-md-4">
     <h2>Últimas Receitas</h2>
     <% @recipes.each do |recipe| %>
       <div class="col-md-6">
         <h1><%= link_to recipe.title, recipe %></h1>
         <ul>
-          <li>Tipo:
-            <%= recipe.recipe_type.name %></li>
-          <li>Cozinha:
-            <%= recipe.cuisine.name %></li>
-          <li>Dificuldade:
-            <%= recipe.difficulty %></li>
-          <li>Tempo de preparo:
-            <%= recipe.cook_time %>
-            minutos</li>
+          <li>Tipo: <%= recipe.recipe_type.name %></li>
+          <li>Cozinha: <%= recipe.cuisine.name %></li>
+          <li>Dificuldade: <%= recipe.difficulty %></li>
+          <li>Tempo de preparo: <%= recipe.cook_time %>minutos</li>
         </ul>
       </div>
     <% end %>
