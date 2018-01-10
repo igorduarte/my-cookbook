@@ -1,5 +1,5 @@
 class CuisinesController < ApplicationController
-  before_action :populate_models
+  before_action :list_all
 
   def show
     @cuisine = Cuisine.find(params[:id])

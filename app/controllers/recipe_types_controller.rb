@@ -1,6 +1,6 @@
 class RecipeTypesController < ApplicationController
-  before_action :populate_models
-  
+  before_action :list_all
+
   def show
     @recipe_type = RecipeType.find(params[:id])
     @recipes = Recipe.where(recipe_type_id: params[:id])
@@ -15,6 +15,7 @@ class RecipeTypesController < ApplicationController
     if @recipe_type.save
       redirect_to @recipe_type
     else
+      flash.now[:error] = "Você deve informar o nome do tipo de receita"
       render 'new'
     end
   end

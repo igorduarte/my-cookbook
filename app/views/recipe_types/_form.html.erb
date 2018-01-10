@@ -9,4 +9,6 @@
 <%= f.submit 'Enviar', class: "btn btn-primary" %>
 <% end %>
 <br>
+<%= flash[:error] %>
+<br>
 <%= render partial: 'shared/error', locals: {error: @recipe_type} %>
