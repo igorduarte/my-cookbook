@@ -1,18 +1,12 @@
 <%= form_for @recipe_type do |f| %>
-<div class="row">
-  <div class="form-group col-md-2">
-    <%= f.label :name, 'Nome' %>
-    <%= f.text_field :name, class: "form-control" %>
+  <div class="row">
+    <div class="form-group col-md-2">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
   </div>
-</div>
 <%= link_to "Voltar", root_path, class: "btn btn-default" %>
-<%= f.submit 'Enviar', class: "btn btn-primary" %><br>
+<%= f.submit 'Enviar', class: "btn btn-primary" %>
 <% end %>
-
-<% if @recipe_type.errors.any? %>
-<ul>
-  <% @recipe_type.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-  <% end %>
-</ul>
-<% end %>
+<br>
+<%= render partial: 'shared/error', locals: {error: @recipe_type} %>

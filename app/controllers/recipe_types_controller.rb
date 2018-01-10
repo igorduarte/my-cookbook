@@ -1,4 +1,6 @@
 class RecipeTypesController < ApplicationController
+  before_action :populate_models
+  
   def show
     @recipe_type = RecipeType.find(params[:id])
     @recipes = Recipe.where(recipe_type_id: params[:id])

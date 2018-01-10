@@ -7,39 +7,39 @@
   </div>
   <div class="row">
     <div class="form-group col-md-2">
-      <%= f.label :recipe_type_id, 'Tipo da Receita' %>
+      <%= f.label :recipe_type_id %>
       <%= f.collection_select :recipe_type_id, @recipe_types, :id, :name,
         { include_blank: false }, {class: "form-control"} %>
     </div>
   </div>
   <div class="row">
     <div class="form-group col-md-2">
-      <%= f.label :cuisine_id, 'Cozinha' %>
+      <%= f.label :cuisine_id %>
       <%= f.collection_select :cuisine_id, @cuisines, :id, :name,
         { include_blank: false }, {class: "form-control"} %>
     </div>
   </div>
   <div class="row">
     <div class="form-group col-md-2">
-      <%= f.label :difficulty, 'Dificuldade' %>
+      <%= f.label :difficulty %>
       <%= f.text_field :difficulty, class: "form-control" %>
     </div>
   </div>
   <div class="row">
     <div class="form-group col-md-2">
-      <%= f.label :cook_time, 'Tempo de Preparo' %>
+      <%= f.label :cook_time %>
       <%= f.text_field :cook_time, class: "form-control" %>
     </div>
   </div>
   <div class="row">
     <div class="form-group col-md-2">
-      <%= f.label :ingredients, 'Ingredientes' %>
+      <%= f.label :ingredients %>
       <%= f.text_area :ingredients, class: "form-control" %>
     </div>
   </div>
   <div class="row">
     <div class="form-group col-md-2">
-      <%= f.label :method, 'Como Preparar' %>
+      <%= f.label :method %>
       <%= f.text_area :method, class: "form-control" %>
     </div>
   </div>
@@ -47,10 +47,4 @@
   <%= f.submit 'Enviar', class: "btn btn-primary" %>
   <% end %>
 
-  <% if @recipe.errors.any? %>
-  <ul>
-    <% @recipe.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
+  <%= render partial: 'shared/error', locals: {error: @recipe} %>

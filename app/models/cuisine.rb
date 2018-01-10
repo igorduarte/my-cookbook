@@ -1,5 +1,5 @@
 class Cuisine < ApplicationRecord
   has_many :recipes
-  validates :name, presence: { message: "Você deve informar o nome da cozinha" },
-    uniqueness: { case_sensitive: false }
+  validates :name, presence: true,
+    uniqueness: { case_sensitive: false, message: 'Cozinha já está em uso' }
 end
