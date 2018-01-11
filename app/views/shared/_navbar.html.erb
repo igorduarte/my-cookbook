@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default">
-  <%= form_tag("/search", method: :get, class: "navbar-form navbar-left") do %>
+  <%= form_tag('recipes/search', method: :get, class: "navbar-form navbar-left") do %>
     <div class="form-group">
       <%= text_field_tag(:term, nil, class: "form-control", id: "Busca", placeholder: "ex.: Feijoada") %>
       <%= submit_tag("Buscar", class: "btn btn-default") %>

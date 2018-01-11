@@ -1,5 +1,4 @@
 class RecipeTypesController < ApplicationController
-  before_action :list_all
 
   def show
     @recipe_type = RecipeType.find(params[:id])

@@ -1,4 +1,7 @@
 class HomeController < ApplicationController
-  before_action :list_all
-  
+  def index
+    @recipes = Recipe.all
+    @recipe_types = RecipeType.all
+    @cuisines = Cuisine.all
+  end
 end

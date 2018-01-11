@@ -1,5 +1,4 @@
 class RecipesController < ApplicationController
-  before_action :list_all
 
   def show
     @recipe = Recipe.find(params[:id])
@@ -7,14 +6,20 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
+    @recipe_types = RecipeType.all
+    @cuisines = Cuisine.all
   end
 
   def edit
     @recipe = Recipe.find(params[:id])
+    @recipe_types = RecipeType.all
+    @cuisines = Cuisine.all
   end
 
   def create
     @recipe = Recipe.create(recipe_params)
+    @recipe_types = RecipeType.all
+    @cuisines = Cuisine.all
     if @recipe.save
       redirect_to @recipe
     else
@@ -24,6 +29,8 @@ class RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find(params[:id])
+    @recipe_types = RecipeType.all
+    @cuisines = Cuisine.all
     if @recipe.update(recipe_params)
       redirect_to @recipe
     else
