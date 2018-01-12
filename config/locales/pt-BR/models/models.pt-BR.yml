@@ -4,6 +4,7 @@ pt-BR:
       cuisine: Cozinha
       recipe: Receita
       recipe_type: Tipo de Receita
+      user: Usuário
     attributes:
       cuisine:
         name: Nome
@@ -17,3 +18,6 @@ pt-BR:
         method: Como Preparar
       recipe_type:
         name: Nome
+      user:
+        email: Email
+        password: Senha
