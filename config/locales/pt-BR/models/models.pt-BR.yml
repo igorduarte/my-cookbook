@@ -1,10 +1,18 @@
 pt-BR:
   activerecord:
     models:
-      cuisine: Cozinha
-      recipe: Receita
-      recipe_type: Tipo de Receita
-      user: Usuário
+      cuisine:
+        one: Cozinha
+        other: Cozinhas
+      recipe:
+        one: Receita
+        other: Receitas
+      recipe_type:
+        one: Tipo da Receita
+        other: Tipos das Receitas
+      user:
+        one: Usuário
+        other: Usuários
     attributes:
       cuisine:
         name: Nome

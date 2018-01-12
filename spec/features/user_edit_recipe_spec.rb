@@ -3,14 +3,14 @@ require 'rails_helper'
 feature 'User update recipe' do
   scenario 'successfully' do
     #cria os dados necessários
-    arabian_cuisine = Cuisine.create(name: 'Arabe')
-    brazilian_cuisine = Cuisine.create(name: 'Brasileira')
+    arabian_cuisine = create(:cuisine, name: 'Arabe')
+    brazilian_cuisine = create(:cuisine, name: 'Brasileira')
 
-    appetizer_type = RecipeType.create(name: 'Entrada')
-    main_type = RecipeType.create(name: 'Prato Principal')
-    dessert_type = RecipeType.create(name: 'Sobremesa')
+    appetizer_type = create(:recipe_type, name: 'Entrada')
+    main_type = create(:recipe_type, name: 'Prato Principal')
+    dessert_type = create(:recipe_type, name: 'Sobremesa')
 
-    recipe = Recipe.create(title: 'Bolodecenoura', recipe_type: main_type,
+    recipe = create(:recipe, title: 'Bolodecenoura', recipe_type: main_type,
                           cuisine: arabian_cuisine, difficulty: 'Médio',
                           cook_time: 50,
                           ingredients: 'Farinha, açucar, cenoura',

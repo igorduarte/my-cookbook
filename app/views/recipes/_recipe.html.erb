@@ -1,0 +1,10 @@
+<div class="recipes">
+  <h1><%= link_to(recipe.title, recipe) %></h1>
+  <ul class="nav">
+    <li><%= recipe.recipe_type.name %></li>
+    <li><%= recipe.cuisine.name %></li>
+    <li><%= recipe.difficulty %></li>
+    <li><%= recipe.cook_time %> minutos</li>
+    <p><%= recipe.ingredients %></p>
+  </ul>
+</div>

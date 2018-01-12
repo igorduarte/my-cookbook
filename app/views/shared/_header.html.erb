@@ -5,7 +5,7 @@
     <nav class="navbar navbar-default">
       <%= form_tag(search_recipes_path, method: :get, class: "navbar-form navbar-left") do %>
         <div class="form-group">
-          <%= text_field_tag(:term, nil, class: "form-control", id: "Busca", placeholder: "ex.: Feijoada") %>
+          <%= text_field_tag(:term, nil, class: "form-control", id: "search", placeholder: "ex.: Feijoada") %>
           <%= submit_tag("Buscar", class: "btn btn-default") %>
         </div>
       <% end %>

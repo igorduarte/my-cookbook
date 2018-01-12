@@ -41,6 +41,7 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'rspec-rails', '~> 3.6'
   gem 'factory_bot_rails'
+  # gem 'database_cleaner'
 end
 
 group :development do

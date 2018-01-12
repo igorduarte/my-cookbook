@@ -39,8 +39,12 @@ class RecipesController < ApplicationController
   end
 
   def search
+    # @search_term = params[:term]
+    # @recipes = Recipe.where(title: @search_term)
     @search_term = params[:term]
-    @recipes = Recipe.where(title: @search_term)
+    search_term_query = "%#{@search_term}%"
+    @recipes = Recipe.where("title LIKE ? OR ingredients LIKE ?", search_term_query, search_term_query)
+    flash[:error] = "Nenhuma receita encontrada com o termo #{@search_term}" unless @recipes.any?
   end
 
   private

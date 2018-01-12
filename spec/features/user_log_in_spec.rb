@@ -13,4 +13,9 @@ feature 'User login' do
     expect(page).to have_content("Bem vindo #{user.email}")
     expect(page).not_to have_content("Entrar")
   end
+
+  pending
+  scenario 'and logout' do
+    user = create(:user)
+  end
 end
