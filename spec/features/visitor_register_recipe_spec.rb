@@ -50,4 +50,16 @@ feature 'Visitor register recipe' do
 
     expect(page).to have_content('Você deve informar todos os dados da receita')
   end
+
+  # scenario 'and must be logged in' do
+  #   user = create(:user)
+  #   logout(:user)
+  # 
+  #   visit root_path
+  #   click_on ''
+  #
+  #   expect(page).to have_content("Bem vindo #{user.email}")
+  #   expect(page).to have_link("Sair")
+  #   expect(page).not_to have_link("")
+  # end
 end

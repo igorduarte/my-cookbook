@@ -17,11 +17,18 @@
           <li class="nav-item"><%= link_to 'Cadastrar uma cozinha', new_cuisine_path, class: "nav-link" %></li>
           <li class="nav-item"><%= link_to 'Cadastrar um tipo de receita', new_recipe_type_path, class: "nav-link" %></li>
           <% if user_signed_in? %>
-            <li class="nav-item"><%= link_to "Bem vindo #{current_user.email}", root_path, class: "nav-link" %></li>
+            <li class="nav-item">
+              <%= link_to "Bem vindo #{current_user.email}", root_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: "nav-link" %>
+            </li>
           <% else %>
-            <li class="nav-item"><%= link_to 'Entrar', new_user_session_path, class: "nav-link" %></li>
+            <li class="nav-item">
+              <%= link_to 'Entrar', new_user_session_path, class: "nav-link" %>
+            </li>
           <% end %>
-          <li class="nav-item"><%= link_to 'Sair', root_path, class: "nav-link" %></li>
+
         </ul>
       </div>
     </nav>
