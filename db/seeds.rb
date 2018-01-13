@@ -30,3 +30,33 @@ recipe3 = Recipe.create(title: 'Tapioca de queijo branco', recipe_type: appetize
   cuisine: brazilian_cuisine, difficulty: 'Fácil', cook_time: 15,
   ingredients: 'Farinha de tapioca, queijo branco',
   method: 'Coloque 5 colheres de farinha de mandioca numa frigideira e em seguida coloque o queijo branco, feche a tapioca')
+
+recipe4 = Recipe.create(title: 'Tapioca', recipe_type: appetizer_type,
+  cuisine: brazilian_cuisine, difficulty: 'Fácil', cook_time: 15,
+  ingredients: 'Farinha de tapioca, queijo branco',
+  method: 'Coloque 5 colheres de farinha de mandioca numa frigideira e em seguida coloque o queijo branco, feche a tapioca')
+
+recipe5 = Recipe.create(title: 'Casquinha de Siri', recipe_type: appetizer_type,
+  cuisine: brazilian_cuisine, difficulty: 'Fácil', cook_time: 15,
+  ingredients: 'Farinha de tapioca, queijo branco',
+  method: 'Coloque 5 colheres de farinha de mandioca numa frigideira e em seguida coloque o queijo branco, feche a tapioca')
+
+recipe6 = Recipe.create(title: 'Bolo de laranja', recipe_type: appetizer_type,
+  cuisine: brazilian_cuisine, difficulty: 'Fácil', cook_time: 15,
+  ingredients: 'Farinha de tapioca, queijo branco',
+  method: 'Coloque 5 colheres de farinha de mandioca numa frigideira e em seguida coloque o queijo branco, feche a tapioca')
+
+recipe7 = Recipe.create(title: 'Sorvete de flocos', recipe_type: appetizer_type,
+  cuisine: brazilian_cuisine, difficulty: 'Fácil', cook_time: 15,
+  ingredients: 'Farinha de tapioca, queijo branco',
+  method: 'Coloque 5 colheres de farinha de mandioca numa frigideira e em seguida coloque o queijo branco, feche a tapioca')
+
+recipe8 = Recipe.create(title: 'Camarão na moranga', recipe_type: appetizer_type,
+  cuisine: brazilian_cuisine, difficulty: 'Fácil', cook_time: 15,
+  ingredients: 'Farinha de tapioca, queijo branco',
+  method: 'Coloque 5 colheres de farinha de mandioca numa frigideira e em seguida coloque o queijo branco, feche a tapioca')
+
+recipe9 = Recipe.create(title: 'Ceviche', recipe_type: appetizer_type,
+  cuisine: brazilian_cuisine, difficulty: 'Fácil', cook_time: 15,
+  ingredients: 'Farinha de tapioca, queijo branco',
+  method: 'Coloque 5 colheres de farinha de mandioca numa frigideira e em seguida coloque o queijo branco, feche a tapioca')

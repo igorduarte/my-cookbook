@@ -18,6 +18,7 @@ pt-BR:
         name: Nome
       recipe:
         title: Título
+        favorite: Favorita
         recipe_type_id: Tipo da Receita
         cuisine_id: Cozinha
         difficulty: Dificuldade

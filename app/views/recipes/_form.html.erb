@@ -7,6 +7,12 @@
    </div>
    <div class="row">
      <div class="form-group col-md-2">
+       <%= f.label :favorite %><br>
+       <%= f.check_box :favorite %>
+     </div>
+   </div>
+   <div class="row">
+     <div class="form-group col-md-2">
        <%= f.label :recipe_type_id %>
        <%= f.collection_select :recipe_type_id, @recipe_types, :id, :name,
          { include_blank: false }, {class: "form-control"} %>

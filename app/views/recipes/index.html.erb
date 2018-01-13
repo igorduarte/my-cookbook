@@ -1,1 +1,9 @@
-<%= render 'shared/recent_recipes_section' %>
+<section class="col-md-4 col-md-offset-1 col-xs-offset-1 col-xs-12">
+  <h2>Todas as Receitas</h2>
+  <span><%= link_to 'Voltar', root_path %></span>
+  <% @recipes.each do |recipe| %>
+    <div class="col-md-12 col-xs-2">
+      <%= render recipe %>
+    </div>
+  <% end %>
+</section>

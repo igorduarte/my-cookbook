@@ -3,15 +3,29 @@
   <head>
     <title>My CookBook</title>
     <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <main class="container-fluid">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      <%= yield %>
-    </main>
+    <div class="container-fluid">
+
+      <header class="col-md-12">
+        <%= render 'shared/header' %>
+      </header>
+
+      <main>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+        <%= yield %>
+      </main>
+
+
+      <div class="row">
+        <footer></footer>
+      </div>
+
+
+    </div>
   </body>
 </html>

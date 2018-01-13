@@ -16,5 +16,6 @@ feature 'User delete recipe' do
 
     expect(Recipe.all).not_to include recipe
     expect(current_path).to eq root_path
+    # expect(recipe.destroyed?).to be true
   end
 end

@@ -1,6 +1,9 @@
 <h1><%= @recipe.title %></h1>
 <h3>Detalhes</h3>
 <p><strong>Prato: </strong><%= @recipe.recipe_type.name %></p>
+<% if @recipe.favorite? %>
+  <p><span class="glyphicon glyphicon-heart-empty"></span></p>
+<% end %>
 <p><strong>Cozinha de origem:</strong> <%= @recipe.cuisine.name %></p>
 <p><strong>Dificuldade: </strong><%= @recipe.difficulty %></p>
 <p><strong>Tempo de preparo: </strong><%= @recipe.cook_time %> minutos</p>

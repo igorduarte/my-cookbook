@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180112004205) do
+ActiveRecord::Schema.define(version: 20180113185932) do
+
+  create_table "assignments", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+    t.index ["role_id"], name: "index_assignments_on_role_id"
+    t.index ["user_id"], name: "index_assignments_on_user_id"
+  end
 
   create_table "cuisines", force: :cascade do |t|
     t.string "name"
@@ -34,8 +41,15 @@ ActiveRecord::Schema.define(version: 20180112004205) do
     t.text "method"
     t.integer "cuisine_id"
     t.integer "recipe_type_id"
+    t.boolean "favorite"
+    t.integer "author_id"
+    t.index ["author_id"], name: "index_recipes_on_author_id"
     t.index ["cuisine_id"], name: "index_recipes_on_cuisine_id"
     t.index ["recipe_type_id"], name: "index_recipes_on_recipe_type_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "title"
   end
 
   create_table "users", force: :cascade do |t|

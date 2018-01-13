@@ -1,6 +1,12 @@
 class RecipesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
+  def index
+    @recipes = Recipe.all
+    @recipe_types = RecipeType.all
+    @cuisines = Cuisine.all
+  end
+
   def show
     @recipe = Recipe.find(params[:id])
   end
@@ -52,10 +58,14 @@ class RecipesController < ApplicationController
     flash[:error] = "Nenhuma receita encontrada com o termo #{@search_term}" unless @recipes.any?
   end
 
+  def favorite
+    @recipes = Recipe.where(favorite: true).all
+  end
+
   private
 
   def recipe_params
     params.require(:recipe).permit(:title, :recipe_type_id, :cuisine_id,
-      :difficulty, :cook_time, :ingredients, :method)
+      :difficulty, :cook_time, :ingredients, :method, :favorite, :author_id)
   end
 end

@@ -1,11 +1,9 @@
-<aside class="col-md-2 col-xs-2 well">
-  <h2>Tipo</h2>
-  <% @recipe_types.each do |recipe_types| %>
-    <li class="nav"><%= link_to recipe_types.name, recipe_type_path(recipe_types.id)%></li>
-  <% end %>
+<h2>Tipo</h2>
+<% @recipe_types.each do |recipe_types| %>
+  <li class="nav"><%= link_to recipe_types.name, recipe_type_path(recipe_types.id)%></li>
+<% end %>
 
-  <h2>Cozinha</h2>
-  <% @cuisines.each do |cuisine| %>
-    <li class="nav"><%= link_to cuisine.name, cuisine_path(cuisine.id)%></li>
-  <% end %>
-</aside>
+<h2>Cozinha</h2>
+<% @cuisines.each do |cuisine| %>
+  <li class="nav"><%= link_to cuisine.name, cuisine_path(cuisine.id)%></li>
+<% end %>
