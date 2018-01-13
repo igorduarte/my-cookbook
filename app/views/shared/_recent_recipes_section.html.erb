@@ -2,13 +2,7 @@
   <h2>Últimas Receitas</h2>
   <% @recipes.each do |recipe| %>
     <div class="col-md-12 col-xs-2">
-      <h1><%= link_to recipe.title, recipe %></h1>
-      <ul class="nav">
-        <li>Tipo: <%= recipe.recipe_type.name %></li>
-        <li>Cozinha: <%= recipe.cuisine.name %></li>
-        <li>Dificuldade: <%= recipe.difficulty %></li>
-        <li>Tempo de preparo: <%= recipe.cook_time %> minutos</li>
-      </ul>
+      <%= render recipe %>
     </div>
   <% end %>
 </section>

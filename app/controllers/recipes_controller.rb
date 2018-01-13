@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def show
     @recipe = Recipe.find(params[:id])
@@ -39,9 +39,17 @@ class RecipesController < ApplicationController
     end
   end
 
+  def destroy
+    @recipe = Recipe.find(params[:id])
+    @recipe.destroy
+    if @recipe.destroyed?
+      redirect_to root_path
+    else
+      flash[:error] = "Nao foi possivel excluir"
+    end
+  end
+
   def search
-    # @search_term = params[:term]
-    # @recipes = Recipe.where(title: @search_term)
     @search_term = params[:term]
     search_term_query = "%#{@search_term}%"
     @recipes = Recipe.where("title LIKE ? OR ingredients LIKE ?", search_term_query, search_term_query)

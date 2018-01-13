@@ -1,5 +1,7 @@
 <h2>Resultado da busca por <%= @search_term %></h2>
 <p><%= flash[:error] %></p>
-<% @recipes.each do |recipe| %>
-  <%= render recipe %>
-<% end %>
+  <% @recipes.each do |recipe| %>
+  <div class="recipes">
+    <%= render recipe %>
+  </div>
+  <% end %>

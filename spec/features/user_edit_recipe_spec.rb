@@ -3,20 +3,20 @@ require 'rails_helper'
 feature 'User update recipe' do
   scenario 'successfully' do
     #cria os dados necessários
-    arabian_cuisine   = create(:cuisine, name: 'Arabe')
-    brazilian_cuisine = create(:cuisine, name: 'Brasileira')
+    arabian_cuisine   = create :cuisine, name: 'Arabe'
+    brazilian_cuisine = create :cuisine, name: 'Brasileira'
 
-    appetizer_type    = create(:recipe_type, name: 'Entrada')
-    main_type         = create(:recipe_type, name: 'Prato Principal')
-    dessert_type      = create(:recipe_type, name: 'Sobremesa')
+    appetizer_type    = create :recipe_type, name: 'Entrada'
+    main_type         = create :recipe_type, name: 'Prato Principal'
+    dessert_type      = create :recipe_type, name: 'Sobremesa'
 
     recipe = create(:recipe, title: 'Bolodecenoura', recipe_type: main_type,
       cuisine: arabian_cuisine, difficulty: 'Médio', cook_time: 50,
       ingredients: 'Farinha, açucar, cenoura',
       method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
 
-    user = create(:user)
-    login_as(user, scope: :user)
+    user = create :user
+    login_as user, scope: :user
 
     # simula a ação do usuário
     visit root_path
@@ -45,24 +45,20 @@ feature 'User update recipe' do
 
   scenario 'and all fields must be filled' do
     #cria os dados necessários, nesse caso não vamos criar dados no banco
-    arabian_cuisine = Cuisine.create(name: 'Arabe')
-    brazilian_cuisine = Cuisine.create(name: 'Brasileira')
+    arabian_cuisine = create :cuisine, name: 'Arabe'
+    brazilian_cuisine = create :cuisine, name: 'Brasileira'
 
-    appetizer_type = RecipeType.create(name: 'Entrada')
-    main_type = RecipeType.create(name: 'Prato Principal')
-    dessert_type = RecipeType.create(name: 'Sobremesa')
+    appetizer_type = create :recipe_type, name: 'Entrada'
+    main_type = create :recipe_type, name: 'Prato Principal'
+    dessert_type = create :recipe_type, name: 'Sobremesa'
 
-    recipe = Recipe.create(title: 'Bolodecenoura', recipe_type: main_type,
-                          cuisine: arabian_cuisine, difficulty: 'Médio',
-                          cook_time: 50,
-                          ingredients: 'Farinha, açucar, cenoura',
-                          method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+    recipe = create :recipe, cuisine: brazilian_cuisine, recipe_type: main_type
 
-    user = create(:user)
-    login_as(user, scope: :user)
+    user = create :user
+    login_as user, scope: :user
     # simula a ação do usuário
     visit root_path
-    click_on 'Bolodecenoura'
+    click_on recipe.title
     click_on 'Editar'
 
     fill_in 'Título', with: ''
@@ -74,5 +70,18 @@ feature 'User update recipe' do
     click_on 'Enviar'
 
     expect(page).to have_content('Você deve informar todos os dados da receita')
+  end
+
+  scenario 'and must be logged in' do
+    recipe = create :recipe
+    user = create :user
+    logout :user
+
+    visit root_path
+    click_on recipe.title
+    click_on 'Editar'
+
+    expect(page).to have_content :unauthenticated
+    expect(current_path).not_to eq edit_recipe_path(recipe.id)
   end
 end
