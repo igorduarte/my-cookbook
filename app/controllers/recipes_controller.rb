@@ -42,11 +42,7 @@ class RecipesController < ApplicationController
   def destroy
     @recipe = Recipe.find(params[:id])
     @recipe.destroy
-    if @recipe.destroyed?
-      redirect_to root_path
-    else
-      flash[:error] = "Nao foi possivel excluir"
-    end
+    redirect_to root_path
   end
 
   def search
