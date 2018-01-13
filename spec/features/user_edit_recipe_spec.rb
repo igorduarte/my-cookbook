@@ -3,22 +3,24 @@ require 'rails_helper'
 feature 'User update recipe' do
   scenario 'successfully' do
     #cria os dados necessários
-    arabian_cuisine = create(:cuisine, name: 'Arabe')
+    arabian_cuisine   = create(:cuisine, name: 'Arabe')
     brazilian_cuisine = create(:cuisine, name: 'Brasileira')
 
-    appetizer_type = create(:recipe_type, name: 'Entrada')
-    main_type = create(:recipe_type, name: 'Prato Principal')
-    dessert_type = create(:recipe_type, name: 'Sobremesa')
+    appetizer_type    = create(:recipe_type, name: 'Entrada')
+    main_type         = create(:recipe_type, name: 'Prato Principal')
+    dessert_type      = create(:recipe_type, name: 'Sobremesa')
 
     recipe = create(:recipe, title: 'Bolodecenoura', recipe_type: main_type,
-                          cuisine: arabian_cuisine, difficulty: 'Médio',
-                          cook_time: 50,
-                          ingredients: 'Farinha, açucar, cenoura',
-                          method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+      cuisine: arabian_cuisine, difficulty: 'Médio', cook_time: 50,
+      ingredients: 'Farinha, açucar, cenoura',
+      method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+
+    user = create(:user)
+    login_as(user, scope: :user)
 
     # simula a ação do usuário
     visit root_path
-    click_on 'Bolodecenoura'
+    click_on recipe.title
     click_on 'Editar'
 
     fill_in 'Título', with: 'Bolo de cenoura'
@@ -56,6 +58,8 @@ feature 'User update recipe' do
                           ingredients: 'Farinha, açucar, cenoura',
                           method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
 
+    user = create(:user)
+    login_as(user, scope: :user)
     # simula a ação do usuário
     visit root_path
     click_on 'Bolodecenoura'

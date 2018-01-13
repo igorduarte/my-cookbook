@@ -3,10 +3,13 @@ require 'rails_helper'
 feature 'Visitor register recipe' do
   scenario 'successfully' do
     #cria os dados necessários
-    Cuisine.create(name: 'Arabe')
-    RecipeType.create(name: 'Entrada')
-    RecipeType.create(name: 'Prato Principal')
-    RecipeType.create(name: 'Sobremesa')
+    create :cuisine, name: 'Arabe'
+    create :recipe_type, name: 'Entrada'
+    create :recipe_type, name: 'Prato Principal'
+    create :recipe_type, name: 'Sobremesa'
+
+    user = create :user
+    login_as user, scope: :user
     # simula a ação do usuário
     visit root_path
     click_on 'Enviar uma receita'
@@ -35,7 +38,9 @@ feature 'Visitor register recipe' do
 
   scenario 'and must fill in all fields' do
     #cria os dados necessários, nesse caso não vamos criar dados no banco
-    Cuisine.create(name: 'Arabe')
+    create :cuisine, name: 'Arabe'
+    user = create :user
+    login_as user, scope: :user
     # simula a ação do usuário
     visit root_path
     click_on 'Enviar uma receita'
@@ -47,19 +52,17 @@ feature 'Visitor register recipe' do
     fill_in 'Como Preparar', with: ''
     click_on 'Enviar'
 
-
     expect(page).to have_content('Você deve informar todos os dados da receita')
   end
 
-  # scenario 'and must be logged in' do
-  #   user = create(:user)
-  #   logout(:user)
-  # 
-  #   visit root_path
-  #   click_on ''
-  #
-  #   expect(page).to have_content("Bem vindo #{user.email}")
-  #   expect(page).to have_link("Sair")
-  #   expect(page).not_to have_link("")
-  # end
+  scenario 'and must be logged in' do
+    user = create :user
+    logout :user
+
+    visit root_path
+    click_on 'Enviar uma receita'
+
+    expect(page).to have_content(:unauthenticated)
+    expect(current_path).not_to eq(new_recipe_path)
+  end
 end

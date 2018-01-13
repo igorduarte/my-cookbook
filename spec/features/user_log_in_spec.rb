@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'User login' do
   scenario 'successfully' do
     user = create(:user, email: "igor@campuscode.com", password: "10203040")
-    logout(:user)
+    logout :user
 
     visit root_path
     click_on 'Entrar'
@@ -17,8 +17,8 @@ feature 'User login' do
   end
 
   scenario 'and logout' do
-    user = create(:user)
-    login_as(user, :scope => :user)
+    user = create :user
+    login_as user, scope: :user
 
     visit root_path
     click_on 'Sair'
