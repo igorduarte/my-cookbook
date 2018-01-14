@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :recipes, inverse_of: 'author', dependent: :destroy
-  has_many :assignments
-  has_many :roles, through: :assignments
+
+  # has_many :assignments
+  # has_many :roles, through: :assignments
 end

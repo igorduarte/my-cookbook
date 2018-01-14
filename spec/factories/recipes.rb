@@ -7,6 +7,7 @@ FactoryBot.define do
     add_attribute(:method) { 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes' }
     recipe_type
     cuisine
+    # user
     # association :author, factory: :user, name: "Igor"
   end
 end

@@ -11,6 +11,9 @@
 <p><%= @recipe.ingredients %></p>
 <h3>Como Preparar</h3>
 <p><%= @recipe.method %></p>
+<br>
+<p>Autor: <%= @recipe.user.name %></p>
+
 
 <%= link_to "Voltar", root_path, class: "btn btn-default" %>
 <%= link_to "Editar", edit_recipe_path(@recipe), class: "btn btn-primary" %>
