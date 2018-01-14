@@ -22,7 +22,8 @@ class RecipesController < ApplicationController
     @recipe_types = RecipeType.all
     @cuisines = Cuisine.all
 
-    redirect_to root_path unless @recipe.user == current_user
+    # redirect_to root_path unless @recipe.user == current_user
+    redirect_to_home_if_not_author
   end
 
   def create
@@ -73,8 +74,8 @@ class RecipesController < ApplicationController
       :ingredients, :method, :favorite, :recipe_type_id, :cuisine_id, :user_id)
   end
 
-  # def redirect_wrong_path
-  #   @recipe = Recipe.find(params[:id])
-  #   redirect_to root_path unless edit_recipe_path(@recipe.current_user)
-  # end
+  def redirect_to_home_if_not_author
+   @recipe = Recipe.find(params[:id])
+   redirect_to root_path unless @recipe.user == current_user
+  end
 end
