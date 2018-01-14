@@ -3,19 +3,22 @@ require 'rails_helper'
 feature 'User update recipe' do
   scenario 'successfully' do
     #cria os dados necessários
-    arabian_cuisine   = create :cuisine, name: 'Arabe'
+    arabian_cuisine = create :cuisine, name: 'Arabe'
     brazilian_cuisine = create :cuisine, name: 'Brasileira'
 
-    appetizer_type    = create :recipe_type, name: 'Entrada'
-    main_type         = create :recipe_type, name: 'Prato Principal'
-    dessert_type      = create :recipe_type, name: 'Sobremesa'
+    appetizer_type = create :recipe_type, name: 'Entrada'
+    main_type = create :recipe_type, name: 'Prato Principal'
+    dessert_type = create :recipe_type, name: 'Sobremesa'
+
+    user = create :user
 
     recipe = create(:recipe, title: 'Bolodecenoura', recipe_type: main_type,
       cuisine: arabian_cuisine, difficulty: 'Médio', cook_time: 50,
       ingredients: 'Farinha, açucar, cenoura',
-      method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+      method: 'Cozinhe a cenoura, corte em pedaços pequenos,
+        misture com o restante dos ingredientes', user: user)
 
-    user = create :user
+
     login_as user, scope: :user
 
     # simula a ação do usuário
@@ -52,9 +55,12 @@ feature 'User update recipe' do
     main_type = create :recipe_type, name: 'Prato Principal'
     dessert_type = create :recipe_type, name: 'Sobremesa'
 
-    recipe = create :recipe, cuisine: brazilian_cuisine, recipe_type: main_type
-
     user = create :user
+
+    recipe = create :recipe, cuisine: brazilian_cuisine,
+      recipe_type: main_type, user: user
+
+
     login_as user, scope: :user
     # simula a ação do usuário
     visit root_path
@@ -73,15 +79,16 @@ feature 'User update recipe' do
   end
 
   scenario 'and must be logged in' do
-    recipe = create :recipe
     user = create :user
+    recipe = create :recipe, user: user
+
     logout :user
 
     visit root_path
     click_on recipe.title
-    click_on 'Editar'
+    visit edit_recipe_path(recipe)
 
     expect(page).to have_content :unauthenticated
-    expect(current_path).not_to eq edit_recipe_path(recipe.id)
+    expect(current_path).not_to eq edit_recipe_path(recipe)
   end
 end

@@ -2,12 +2,12 @@ require 'rails_helper'
 
 feature 'Recipe has author' do
   scenario 'shows the author of recipe' do
-    user = create :user
+    author = create :user, name: "Angela"
     cuisine = create :cuisine
     recipe_type = create :recipe_type
-    recipe = create :recipe, recipe_type: recipe_type, cuisine: cuisine, user: user
+    recipe = create :recipe, recipe_type: recipe_type, cuisine: cuisine, user: author
 
-    login_as user, scope: :user
+    login_as author, scope: :user
 
     visit root_path
     click_link recipe.title

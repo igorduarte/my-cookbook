@@ -21,11 +21,13 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     @recipe_types = RecipeType.all
     @cuisines = Cuisine.all
+
+    redirect_to root_path unless @recipe.user == current_user
   end
 
   def create
     @recipe = Recipe.new(recipe_params)
-    @recipe.user_id = current_user.id
+    @recipe.user = current_user
     @recipe_types = RecipeType.all
     @cuisines = Cuisine.all
     if @recipe.save
@@ -39,6 +41,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     @recipe_types = RecipeType.all
     @cuisines = Cuisine.all
+
     if @recipe.update(recipe_params)
       redirect_to @recipe
     else
@@ -69,4 +72,9 @@ class RecipesController < ApplicationController
     params.require(:recipe).permit(:title, :difficulty, :cook_time,
       :ingredients, :method, :favorite, :recipe_type_id, :cuisine_id, :user_id)
   end
+
+  # def redirect_wrong_path
+  #   @recipe = Recipe.find(params[:id])
+  #   redirect_to root_path unless edit_recipe_path(@recipe.current_user)
+  # end
 end

@@ -1,12 +1,11 @@
-
 require 'rails_helper'
 
 feature 'Visitor view recipes by type' do
 
   scenario 'from home page' do
     # cria os dados necessários previamente
-    cuisine = Cuisine.create(name: 'Brasileira')
-    recipe_type = RecipeType.create(name: 'Sobremesa')
+    cuisine = create :cuisine
+    recipe_type = create :recipe_type
 
     recipe = Recipe.create(title: 'Bolo de cenoura', recipe_type: recipe_type,
                            cuisine: cuisine, difficulty: 'Médio',

@@ -1,6 +1,6 @@
 <h2>Tipo</h2>
-<% @recipe_types.each do |recipe_types| %>
-  <li class="nav"><%= link_to recipe_types.name, recipe_type_path(recipe_types.id)%></li>
+<% @recipe_types.each do |recipe_type| %>
+  <li class="nav"><%= link_to recipe_type.name, recipe_type_path(recipe_type.id)%></li>
 <% end %>
 
 <h2>Cozinha</h2>

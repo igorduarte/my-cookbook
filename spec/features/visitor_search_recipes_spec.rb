@@ -29,7 +29,9 @@ feature 'Visitor search for recipes' do
     # cria os dados necessários previamente
     cuisine = create(:cuisine)
     recipe_type = create(:recipe_type)
-    recipe = create(:recipe, cuisine: cuisine, recipe_type: recipe_type)
+    user = create(:user)
+    recipe = create(:recipe, cuisine: cuisine,
+      recipe_type: recipe_type, user: user)
 
     # simula a ação do usuário
     visit root_path
