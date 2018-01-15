@@ -1,0 +1,8 @@
+<section class="col-md-4">
+  <h2>Receitas Favoritas</h2>
+  <% @recipes.each do |recipe| %>
+    <div class="col-md-12 col-xs-2">
+      <%= render recipe %>
+    </div>
+  <% end %>
+</section>

@@ -1,9 +1,7 @@
 <h1><%= @recipe.title %></h1>
+<%= link_to 'Favoritar Receita', favorites_recipes_path(@recipe), class: "btn btn-primary" if user_signed_in? %>
 <h3>Detalhes</h3>
 <p><strong>Prato: </strong><%= @recipe.recipe_type.name %></p>
-<% if @recipe.favorite? %>
-  <p><span class="glyphicon glyphicon-heart-empty"></span></p>
-<% end %>
 <p><strong>Cozinha de origem:</strong> <%= @recipe.cuisine.name %></p>
 <p><strong>Dificuldade: </strong><%= @recipe.difficulty %></p>
 <p><strong>Tempo de preparo: </strong><%= @recipe.cook_time %> minutos</p>
@@ -12,13 +10,13 @@
 <h3>Como Preparar</h3>
 <p><%= @recipe.method %></p>
 <br>
-<p>Autor: <%= @recipe.user.name %></p>
+<p><strong>Autor: </strong><%= @recipe.user.name %></p>
 
 
 <%= link_to "Voltar", root_path, class: "btn btn-default" %>
 
 <% if user_signed_in? && @recipe.user == current_user %>
-  <%= link_to "Editar", edit_recipe_path(@recipe), class: "btn btn-primary" %>
+  <%= link_to "Editar", edit_recipe_path(@recipe), class: "btn btn-primary" %> |
   <%= link_to "Excluir Receita", recipe_path(@recipe), method: :delete,
     data: { confirm: 'Tem certeza?' }, class: "btn btn-danger" %>
 <% end %>

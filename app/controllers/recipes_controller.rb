@@ -60,12 +60,22 @@ class RecipesController < ApplicationController
     @search_term = params[:term]
     search_term_query = "%#{@search_term}%"
     @recipes = Recipe.where("title LIKE ? OR ingredients LIKE ?", search_term_query, search_term_query)
+
     flash[:error] = "Nenhuma receita encontrada com o termo #{@search_term}" unless @recipes.any?
   end
 
-  def favorite
-    @recipes = Recipe.where(favorite: true).all
+  def favorites
+    @user = current_user
+    @recipe = Recipe.find(params[:id])
+    # @user.favorite(@recipe)
+    # current_user.favorite(@recipe)
+    # if @recipe.save
+    #   redirect_to favorites_recipes_path
+    # end
+    @recipe.favorites.where(user_id: current_user.id).first_or_create
   end
+
+
 
   private
 
