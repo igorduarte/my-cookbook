@@ -67,11 +67,12 @@ class RecipesController < ApplicationController
   def favorite
     @user = current_user
     @recipe = Recipe.find(params[:id])
+    @favorite = Favorite.new(user: @user, recipe: @recipe)
 
-    @recipe.favorites.where(user_id: @user, recipe_id: @recipe)
+
     # current_user.favorite(@recipe)
     if @recipe.save
-      redirect_to favorite_recipe_path
+      redirect_to @favorite, notice: 'Receita adicionada as Favoritas'
     end
 
   end
