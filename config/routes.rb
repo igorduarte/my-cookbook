@@ -3,12 +3,16 @@ Rails.application.routes.draw do
   root to: 'home#index'
   # get '/search', to: 'recipes#search'
   resources :recipes do
+    member do
+      post 'favorite'
+    end
+
     collection do
       get 'search'
-      get 'favorites'
     end
   end
 
+  resources :favorites, only: [:index, :show, :create]
   resources :cuisines, only: [:show, :new, :create, :index]
   resources :recipe_types, only: [:show, :new, :create]
 end

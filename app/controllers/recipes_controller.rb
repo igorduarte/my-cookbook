@@ -64,15 +64,16 @@ class RecipesController < ApplicationController
     flash[:error] = "Nenhuma receita encontrada com o termo #{@search_term}" unless @recipes.any?
   end
 
-  def favorites
+  def favorite
     @user = current_user
     @recipe = Recipe.find(params[:id])
-    # @user.favorite(@recipe)
+
+    @recipe.favorites.where(user_id: @user, recipe_id: @recipe)
     # current_user.favorite(@recipe)
-    # if @recipe.save
-    #   redirect_to favorites_recipes_path
-    # end
-    @recipe.favorites.where(user_id: current_user.id).first_or_create
+    if @recipe.save
+      redirect_to favorite_recipe_path
+    end
+
   end
 
 

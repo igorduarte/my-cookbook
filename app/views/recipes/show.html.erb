@@ -1,5 +1,7 @@
 <h1><%= @recipe.title %></h1>
-<%= link_to 'Favoritar Receita', favorites_recipes_path(@recipe), class: "btn btn-primary" if user_signed_in? %>
+<% if user_signed_in? %>
+  <%= link_to 'Favoritar Receita', favorite_recipe_path(@recipe), method: :post, class: "btn btn-primary"  %>
+<% end %>
 <h3>Detalhes</h3>
 <p><strong>Prato: </strong><%= @recipe.recipe_type.name %></p>
 <p><strong>Cozinha de origem:</strong> <%= @recipe.cuisine.name %></p>
