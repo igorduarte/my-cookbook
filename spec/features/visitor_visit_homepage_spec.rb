@@ -25,7 +25,7 @@ feature 'Visitor visit homepage' do
     expect(page).to have_css('li', text: "#{recipe.cook_time} minutos")
   end
 
-  scenario 'and view recipes list' do
+  scenario 'and view recipe list' do
     #cria os dados necessários
     cuisine = create :cuisine
     recipe_type = create :recipe_type
@@ -53,5 +53,37 @@ feature 'Visitor visit homepage' do
     expect(page).to have_css('li', text: another_recipe.cuisine.name)
     expect(page).to have_css('li', text: another_recipe.difficulty)
     expect(page).to have_css('li', text: "#{another_recipe.cook_time} minutos")
+  end
+
+  scenario 'and view recipe list with 6 last ones' do
+    user = create :user
+    cuisine = create :cuisine
+    recipe_type = create :recipe_type
+    recipe = create_list(:recipe, 10, cuisine: cuisine,
+      recipe_type: recipe_type, user: user)
+
+    login_as user
+
+    visit root_path
+
+    expect(page).to have_css 'div.col-md-12', count: 6
+    expect(page).not_to have_css 'div.col-md-12', count: 10
+  end
+
+  scenario 'and click link to see all recipes' do
+    user = create :user
+    cuisine = create :cuisine
+    recipe_type = create :recipe_type
+    recipe = create_list(:recipe, 10, cuisine: cuisine,
+      recipe_type: recipe_type, user: user)
+
+    login_as user
+
+    visit root_path
+    click_link 'Ver todas as receitas'
+
+    expect(current_path).to eq recipes_path
+    expect(page).to have_css 'div.col-md-12', count: 10
+    expect(page).not_to have_css 'div.col-md-12', count: 6
   end
 end

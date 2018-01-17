@@ -1,7 +1,13 @@
 <h1><%= @recipe.title %></h1>
+
 <% if user_signed_in? %>
-  <%= link_to 'Favoritar Receita', favorite_recipe_path(@recipe), method: :post, class: "btn btn-primary"  %>
+  <% if current_user.favorited?(@recipe) %>
+    <%= link_to 'Remover dos favoritos', unfavorite_recipe_path(@recipe), method: :delete, class: "btn btn-primary" %>
+  <% else %>
+    <%= link_to 'Favoritar Receita', favorite_recipe_path(@recipe), method: :post, class: "btn btn-primary" %>
+  <% end %>
 <% end %>
+
 <h3>Detalhes</h3>
 <p><strong>Prato: </strong><%= @recipe.recipe_type.name %></p>
 <p><strong>Cozinha de origem:</strong> <%= @recipe.cuisine.name %></p>

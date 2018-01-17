@@ -54,14 +54,21 @@ feature 'Visitor register recipe' do
     expect(page).to have_content('Você deve informar todos os dados da receita')
   end
 
-  scenario 'and must be logged in' do
+  scenario 'and must be authenticated' do
     user = create :user
-    logout :user
 
     visit root_path
     click_on 'Enviar uma receita'
 
-    expect(page).to have_content(:unauthenticated)
+    expect(page).to have_content :unauthenticated
     expect(current_path).not_to eq(new_recipe_path)
+  end
+
+  scenario 'and must be authenticated (via URI)' do
+
+    visit new_recipe_path
+
+    expect(current_path).to eq new_user_session_path
+    expect(page).to have_content :unauthenticated
   end
 end

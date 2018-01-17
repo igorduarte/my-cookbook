@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'User manages his recipes' do
-  scenario 'only logged users sees edit button' do
+  scenario 'and only authenticated ones sees edit button' do
     user = create :user
     cuisine = create :cuisine
     recipe_type = create :recipe_type
@@ -16,7 +16,7 @@ feature 'User manages his recipes' do
     expect(page).not_to have_content "Editar"
   end
 
-  scenario 'and are redirected to homepage if accesss edit_path via URI' do
+  scenario 'and are redirected to homepage trying to accesss via URI' do
     cuisine = create :cuisine
     recipe_type = create :recipe_type
     billy = create :user, name: 'Billy'
@@ -31,7 +31,7 @@ feature 'User manages his recipes' do
     expect(current_path).to eq root_path
   end
 
-  scenario 'not see edit button if it\'is not the owner of recipe' do
+  scenario 'and does not see edit button if it\'s not his recipe' do
     cuisine = create :cuisine
     recipe_type = create :recipe_type
     billy = create :user, name: 'Billy'

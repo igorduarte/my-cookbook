@@ -65,18 +65,24 @@ class RecipesController < ApplicationController
   end
 
   def favorite
-    @user = current_user
     @recipe = Recipe.find(params[:id])
-    @favorite = Favorite.new(user: @user, recipe: @recipe)
+    # @favorite = Favorite.create(user: current_user, recipe: @recipe)
+    @favorite = current_user.favorites.create(recipe: @recipe)
 
-
-    # current_user.favorite(@recipe)
-    if @recipe.save
-      redirect_to @favorite, notice: 'Receita adicionada as Favoritas'
+    if @favorite.valid?
+      flash[:notice] = 'Receita adicionada aos favoritos'
+      redirect_to recipe_path(@recipe)
     end
-
   end
 
+  def unfavorite
+    @recipe = Recipe.find(params[:id])
+    @favorite = Favorite.find_by(user: current_user, recipe: @recipe)
+
+    @favorite.destroy
+    flash[:notice] = 'Receita removida dos favoritos'
+    redirect_to recipe_path(@recipe)
+  end
 
 
   private

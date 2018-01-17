@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-feature 'User login' do
-  scenario 'successfully' do
+feature 'User authentication' do
+  scenario 'login' do
     user = create :user
     logout :user
 

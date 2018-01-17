@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'User update recipe' do
+feature 'User updates recipe' do
   scenario 'successfully' do
     #cria os dados necessários
     arabian_cuisine = create :cuisine, name: 'Arabe'
@@ -19,7 +19,7 @@ feature 'User update recipe' do
         misture com o restante dos ingredientes', user: user)
 
 
-    login_as user, scope: :user
+    login_as user
 
     # simula a ação do usuário
     visit root_path
@@ -61,7 +61,7 @@ feature 'User update recipe' do
       recipe_type: main_type, user: user
 
 
-    login_as user, scope: :user
+    login_as user
     # simula a ação do usuário
     visit root_path
     click_on recipe.title
@@ -78,17 +78,35 @@ feature 'User update recipe' do
     expect(page).to have_content('Você deve informar todos os dados da receita')
   end
 
-  scenario 'and must be logged in' do
+  scenario 'and must be authenticated' do
     user = create :user
     recipe = create :recipe, user: user
 
-    logout :user
-
     visit root_path
     click_on recipe.title
+
+    expect(page).not_to have_link 'Editar'
+  end
+
+  scenario 'and must be authenticated (via URI)' do
+    user = create :user
+    recipe = create :recipe, user: user
+
     visit edit_recipe_path(recipe)
 
     expect(page).to have_content :unauthenticated
-    expect(current_path).not_to eq edit_recipe_path(recipe)
+    expect(current_path).to eq new_user_session_path
   end
+
+  scenario 'and must be the owner of recipe' do
+      user = create :user
+      author = create :user, email: 'palmirinha@campus.com'
+      recipe = create :recipe, user: author
+
+      login_as user
+      visit root_path
+      click_on recipe.title
+
+      expect(page).not_to have_link 'Editar'
+    end
 end

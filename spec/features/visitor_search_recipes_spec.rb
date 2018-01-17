@@ -3,12 +3,12 @@ require 'rails_helper'
 feature 'Visitor search for recipes' do
   scenario 'from home page' do
     # cria os dados necessários previamente
-    cuisine = create(:cuisine)
-    recipe_type = create(:recipe_type)
-    another_recipe_type = create(:recipe_type, name: 'Entrada')
-    recipe = create(:recipe, cuisine: cuisine, recipe_type: recipe_type)
-    another_recipe = create(:recipe, title: 'Salada de cenoura',
-      cuisine: cuisine, recipe_type: recipe_type)
+    cuisine = create :cuisine
+    recipe_type = create :recipe_type
+    another_recipe_type = create :recipe_type, name: 'Entrada'
+    recipe = create :recipe, cuisine: cuisine, recipe_type: recipe_type
+    another_recipe = create :recipe, title: 'Salada de cenoura',
+      cuisine: cuisine, recipe_type: recipe_type
 
     # simula a ação do usuário
     visit root_path
@@ -27,11 +27,11 @@ feature 'Visitor search for recipes' do
 
   scenario 'and navigate to recipe details' do
     # cria os dados necessários previamente
-    cuisine = create(:cuisine)
-    recipe_type = create(:recipe_type)
-    user = create(:user)
-    recipe = create(:recipe, cuisine: cuisine,
-      recipe_type: recipe_type, user: user)
+    cuisine = create :cuisine
+    recipe_type = create :recipe_type
+    user = create :user
+    recipe = create :recipe, cuisine: cuisine,
+      recipe_type: recipe_type, user: user
 
     # simula a ação do usuário
     visit root_path
@@ -44,15 +44,15 @@ feature 'Visitor search for recipes' do
   end
 
   scenario 'and find recipe by title' do
-    cuisine = create(:cuisine)
-    recipe_type = create(:recipe_type)
-    recipe = create(:recipe, title: 'Bolo de cenoura',
+    cuisine = create :cuisine
+    recipe_type = create :recipe_type
+    recipe = create :recipe, title: 'Bolo de cenoura',
       ingredients: 'Farinha, açucar, cenoura',
-      cuisine: cuisine, recipe_type: recipe_type)
+      cuisine: cuisine, recipe_type: recipe_type
 
-    another_recipe = create(:recipe, title: 'Pavê',
+    another_recipe = create :recipe, title: 'Pavê',
       ingredients: 'Chocolate, bolacha e açucar',
-      cuisine: cuisine, recipe_type: recipe_type)
+      cuisine: cuisine, recipe_type: recipe_type
 
     visit root_path
     fill_in 'search', with: recipe.title
@@ -64,21 +64,21 @@ feature 'Visitor search for recipes' do
   end
 
   scenario 'and ingredients' do
-    cuisine = create(:cuisine)
-    recipe_type = create(:recipe_type)
-    recipe = create(:recipe, title: 'Bolo de cenoura',
+    cuisine = create :cuisine
+    recipe_type = create :recipe_type
+    recipe = create :recipe, title: 'Bolo de cenoura',
       ingredients: 'Farinha, açucar, cenoura e chocolate',
-      cuisine: cuisine, recipe_type: recipe_type)
+      cuisine: cuisine, recipe_type: recipe_type
 
-    another_recipe = create(:recipe, title: 'Pavê de chocolate',
+    another_recipe = create :recipe, title: 'Pavê de chocolate',
       ingredients: 'bolacha e açucar',
-      cuisine: cuisine, recipe_type: recipe_type)
+      cuisine: cuisine, recipe_type: recipe_type
 
-    third_recipe = create(:recipe ,title: 'Brigadeiro Branco',
+    third_recipe = create :recipe ,title: 'Brigadeiro Branco',
       ingredients: 'Baunilha, bolacha e açucar',
-      cuisine: cuisine, recipe_type: recipe_type)
+      cuisine: cuisine, recipe_type: recipe_type
 
-    search_term = "chocolate"
+    search_term = 'chocolate'
 
     visit root_path
     fill_in 'search', with: search_term
@@ -93,18 +93,18 @@ feature 'Visitor search for recipes' do
     expect(page).to have_css('div.recipes', count: 2 )
   end
 
-  scenario 'and not find any recipe' do
-    cuisine = create(:cuisine)
-    recipe_type = create(:recipe_type)
-    recipe = create(:recipe, title: 'Bolo de cenoura',
+  scenario 'and does not find any recipe' do
+    cuisine = create :cuisine
+    recipe_type = create :recipe_type
+    recipe = create :recipe, title: 'Bolo de cenoura',
       ingredients: 'Farinha, açucar, cenoura e chocolate',
-      cuisine: cuisine, recipe_type: recipe_type)
+      cuisine: cuisine, recipe_type: recipe_type
 
-    another_recipe = create(:recipe, title: 'Pavê de chocolate',
+    another_recipe = create :recipe, title: 'Pavê de chocolate',
       ingredients: 'Cacau, bolacha e açucar',
-      cuisine: cuisine, recipe_type: recipe_type)
+      cuisine: cuisine, recipe_type: recipe_type
 
-    search_term = "Abacaxi"
+    search_term = 'Abacaxi'
 
     visit root_path
     fill_in 'search', with: search_term

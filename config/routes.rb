@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :recipes do
     member do
       post 'favorite'
+      delete 'favorite', to: 'recipes#unfavorite', as: 'unfavorite'
     end
 
     collection do

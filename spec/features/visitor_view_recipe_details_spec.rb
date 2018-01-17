@@ -47,4 +47,19 @@ feature 'Visitor view recipe details' do
     # expectativa da rota atual
     expect(current_path).to eq(root_path)
   end
+
+  scenario 'and must show author name' do
+    user = create :user
+    author = create :user, name: "Angela"
+    cuisine = create :cuisine
+    recipe_type = create :recipe_type
+    recipe = create :recipe, recipe_type: recipe_type, cuisine: cuisine, user: author
+
+    login_as user
+
+    visit root_path
+    click_link recipe.title
+
+    expect(page).to have_content "Autor: #{recipe.user.name}"
+  end
 end

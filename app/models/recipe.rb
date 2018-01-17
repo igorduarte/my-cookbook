@@ -13,5 +13,8 @@ class Recipe < ApplicationRecord
 
   scope :recent, ->(n) { order(created_at: :desc).limit(n) }
   scope :favorited_by, -> (username) { joins(:favorites).where(favorites: { user: User.where(name: username) }) }
-  
+
+  def is_author?(user)
+    self.user == user
+  end
 end
