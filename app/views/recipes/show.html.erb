@@ -20,6 +20,23 @@
 <br>
 <p><strong>Autor: </strong><%= @recipe.user.name %></p>
 
+<br>
+
+<h3>Compartilhe essa receita com um amigo :)</h3>
+<br>
+<%= form_tag share_recipe_path method: :post do %>
+<div class="row">
+  <div class="form-group col-md-3">
+    <%= label_tag :email, 'Email' %>
+    <%= text_field_tag :email, nil, class: "form-control" %>
+    <%= label_tag :message, 'Mensagem' %>
+    <%= text_area_tag :message, nil, class: "form-control" %>
+    <br>
+    <%= submit_tag 'Enviar', class: "btn btn-primary" %>
+  </div>
+</div>
+<% end %>
+<br>
 
 <%= link_to "Voltar", root_path, class: "btn btn-default" %>
 

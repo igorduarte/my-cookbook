@@ -1,6 +1,7 @@
 class RecipesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :favorite, :unfavorite]
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :favorite,
+    :unfavorite, :share]
   before_action :set_cuisines, only: [:index, :new, :edit]
   before_action :set_types, only: [:index, :new, :edit]
 
@@ -69,6 +70,15 @@ class RecipesController < ApplicationController
     @favorite.destroy
     flash[:notice] = 'Receita removida dos favoritos'
     redirect_to recipe_path(@recipe)
+  end
+
+  def share
+    @email = params[:email]
+    @message = params[:message]
+
+    RecipesMailer.share(@email, @message, @recipe.id).deliver_now
+    flash[:notice] = "Receita enviada para #{@email}"
+    redirect_to @recipe
   end
 
 

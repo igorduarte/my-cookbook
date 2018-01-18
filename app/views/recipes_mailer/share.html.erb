@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>A receita <%= @recipe.title %> foi compartilhada com você :) </h1>
+    <p><%= @message %></p>
+    <%= link_to 'Veja a receita aqui', recipe_url(@recipe) %>
+  </body>
+</html>
