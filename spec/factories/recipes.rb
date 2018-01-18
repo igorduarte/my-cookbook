@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :recipe do
-    title 'Bolo'
+    title 'Paella'
     difficulty 'Média'
     ingredients 'Farinha, açúcar, cenoura'
     cook_time 60
@@ -8,6 +8,5 @@ FactoryBot.define do
     recipe_type
     cuisine
     user
-    # association :author, factory: :user, name: "Igor"
   end
 end

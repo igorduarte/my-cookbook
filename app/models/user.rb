@@ -8,11 +8,11 @@ class User < ApplicationRecord
   has_many :recipes
   has_many :favorite_recipes, through: :favorites, source: :recipe
 
-  # has_many :assignments
-  # has_many :roles, through: :assignments
-
   def favorited?(recipe)
     favorite_recipes.include? recipe
   end
 
+  def author?(recipe)
+    self.eql? recipe.user
+  end
 end

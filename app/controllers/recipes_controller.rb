@@ -1,58 +1,50 @@
 class RecipesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :favorite, :unfavorite]
+  before_action :set_cuisines, only: [:index, :new, :edit]
+  before_action :set_types, only: [:index, :new, :edit]
 
   def index
     @recipes = Recipe.all
-    @recipe_types = RecipeType.all
-    @cuisines = Cuisine.all
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
   end
 
   def new
     @recipe = Recipe.new
-    @recipe_types = RecipeType.all
-    @cuisines = Cuisine.all
   end
 
   def edit
-    @recipe = Recipe.find(params[:id])
-    @recipe_types = RecipeType.all
-    @cuisines = Cuisine.all
-
-    # redirect_to root_path unless @recipe.user == current_user
-    redirect_to_home_if_not_author
+    flash[:notice] = 'Você não tem permissão para editar essa receita'
+    redirect_to root_path unless current_user.author?(@recipe)
   end
 
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
-    @recipe_types = RecipeType.all
-    @cuisines = Cuisine.all
     if @recipe.save
       redirect_to @recipe
     else
+      set_cuisines
+      set_types
       render 'new'
     end
   end
 
   def update
-    @recipe = Recipe.find(params[:id])
-    @recipe_types = RecipeType.all
-    @cuisines = Cuisine.all
-
     if @recipe.update(recipe_params)
       redirect_to @recipe
     else
+      set_cuisines
+      set_types
       render 'edit'
     end
   end
 
   def destroy
-    @recipe = Recipe.find(params[:id])
     @recipe.destroy
+    flash[:notice] = 'Receita excluída'
     redirect_to root_path
   end
 
@@ -65,10 +57,7 @@ class RecipesController < ApplicationController
   end
 
   def favorite
-    @recipe = Recipe.find(params[:id])
-    # @favorite = Favorite.create(user: current_user, recipe: @recipe)
     @favorite = current_user.favorites.create(recipe: @recipe)
-
     if @favorite.valid?
       flash[:notice] = 'Receita adicionada aos favoritos'
       redirect_to recipe_path(@recipe)
@@ -76,9 +65,7 @@ class RecipesController < ApplicationController
   end
 
   def unfavorite
-    @recipe = Recipe.find(params[:id])
     @favorite = Favorite.find_by(user: current_user, recipe: @recipe)
-
     @favorite.destroy
     flash[:notice] = 'Receita removida dos favoritos'
     redirect_to recipe_path(@recipe)
@@ -92,8 +79,15 @@ class RecipesController < ApplicationController
       :ingredients, :method, :favorite, :recipe_type_id, :cuisine_id, :user_id)
   end
 
-  def redirect_to_home_if_not_author
-   @recipe = Recipe.find(params[:id])
-   redirect_to root_path unless @recipe.user == current_user
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
+  end
+
+  def set_cuisines
+    @cuisines = Cuisine.all
+  end
+
+  def set_types
+    @recipe_types = RecipeType.all
   end
 end

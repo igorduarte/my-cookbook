@@ -109,4 +109,17 @@ feature 'User updates recipe' do
 
       expect(page).not_to have_link 'Editar'
     end
+
+    scenario 'and must be the owner of recipe (via URI)' do
+      user = create :user
+      author = create :user, email: 'palmirinha@campus.com'
+      recipe = create :recipe, user: author
+
+      login_as user
+      visit edit_recipe_path(recipe)
+
+      expect(current_path).to eq root_path
+      expect(page).to have_content %{Você não tem permissão para
+        editar essa receita}
+    end
 end

@@ -6,8 +6,9 @@ feature 'Visitor view recipes by type' do
     # cria os dados necessários previamente
     cuisine = create :cuisine
     recipe_type = create :recipe_type
+    user = create :user
 
-    recipe = create :recipe, title: 'Bolo de cenoura', recipe_type: recipe_type,
+    recipe = create :recipe, user: user, title: 'Bolo de cenoura', recipe_type: recipe_type,
       cuisine: cuisine, difficulty: 'Médio', cook_time: 60,
       ingredients: 'Farinha, açucar, cenoura', method: %{Cozinhe a cenoura,
         corte em pedaços pequenos, misture com o restante dos ingredientes}
@@ -26,17 +27,17 @@ feature 'Visitor view recipes by type' do
   end
 
   scenario 'and view only recipes from same type' do
-
+    user = create :user
     brazilian_cuisine = create :cuisine, name: 'Brasileira'
     dessert_recipe_type = create :recipe_type, name: 'Sobremesa'
-    dessert_recipe = create :recipe, title: 'Bolo de cenoura', recipe_type: dessert_recipe_type,
+    dessert_recipe = create :recipe, user: user, title: 'Bolo de cenoura', recipe_type: dessert_recipe_type,
       cuisine: brazilian_cuisine, difficulty: 'Médio', cook_time: 60,
       ingredients: 'Farinha, açucar, cenoura', method: %{ Cozinhe a cenoura,
         corte em pedaços pequenos, misture com o restante dos ingredientes }
 
     italian_cuisine = create :cuisine, name: 'Italiana'
     main_recipe_type = create :recipe_type, name: 'Prato Principal'
-    main_recipe = create :recipe, title: 'Macarrão Carbonara', recipe_type: main_recipe_type,
+    main_recipe = create :recipe, user: user, title: 'Macarrão Carbonara', recipe_type: main_recipe_type,
       cuisine: italian_cuisine, difficulty: 'Difícil', cook_time: 30,
       ingredients: 'Massa, ovos, bacon', method: %{Frite o bacon; Cozinhe a massa
         ate ficar al dent; Misture os ovos e o bacon a massa ainda quente;}
@@ -57,12 +58,13 @@ feature 'Visitor view recipes by type' do
   end
 
   scenario 'and type has no recipe' do
+    user = create :user
     brazilian_cuisine = create :cuisine, name: 'Brasileira'
 
     recipe_type = create :recipe_type, name: 'Sobremesa'
     main_dish_type = create :recipe_type, name: 'Prato Principal'
 
-    recipe = create :recipe, title: 'Bolo de cenoura', recipe_type: recipe_type,
+    recipe = create :recipe, user: user, title: 'Bolo de cenoura', recipe_type: recipe_type,
       cuisine: brazilian_cuisine, difficulty: 'Médio', cook_time: 60,
       ingredients: 'Farinha, açucar, cenoura',
       method: %{Cozinhe a cenoura, corte em pedaços pequenos, misture com o

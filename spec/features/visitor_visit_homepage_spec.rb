@@ -59,22 +59,26 @@ feature 'Visitor visit homepage' do
     user = create :user
     cuisine = create :cuisine
     recipe_type = create :recipe_type
-    recipe = create_list(:recipe, 10, cuisine: cuisine,
+    old_recipe = create :recipe, title: 'Receita antiga', cuisine: cuisine,
+      recipe_type: recipe_type, user: user
+    recipes = create_list(:recipe, 6, cuisine: cuisine,
       recipe_type: recipe_type, user: user)
 
     login_as user
 
     visit root_path
 
+    expect(page).to have_link recipes[0].title
     expect(page).to have_css 'div.col-md-12', count: 6
-    expect(page).not_to have_css 'div.col-md-12', count: 10
+    expect(page).not_to have_link old_recipe.title
+    expect(page).not_to have_css 'div.col-md-12', count: 7
   end
 
   scenario 'and click link to see all recipes' do
     user = create :user
     cuisine = create :cuisine
     recipe_type = create :recipe_type
-    recipe = create_list(:recipe, 10, cuisine: cuisine,
+    recipes = create_list(:recipe, 10, cuisine: cuisine,
       recipe_type: recipe_type, user: user)
 
     login_as user
@@ -84,6 +88,7 @@ feature 'Visitor visit homepage' do
 
     expect(current_path).to eq recipes_path
     expect(page).to have_css 'div.col-md-12', count: 10
-    expect(page).not_to have_css 'div.col-md-12', count: 6
+    expect(page).to have_link recipes[0].title
+    expect(page).to have_link recipes[9].title
   end
 end
