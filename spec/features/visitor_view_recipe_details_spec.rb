@@ -62,4 +62,13 @@ feature 'Visitor view recipe details' do
 
     expect(page).to have_content "Autor: #{recipe.user.name}"
   end
+
+  scenario 'and see recipe photo' do
+    recipe = create :recipe, title: 'Feijoada branca'
+
+    visit root_path
+    click_on recipe.title
+
+    expect(page).to have_css "img[src*='recipe_image.png']"
+  end
 end

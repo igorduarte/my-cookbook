@@ -1,5 +1,7 @@
 <h1><%= @recipe.title %></h1>
-
+<%= image_tag @recipe.image.url(:medium), class: "img-thumbnail" %>
+<br>
+<br>
 <% if current_user && current_user.favorited?(@recipe) %>
   <%= link_to 'Remover dos favoritos', unfavorite_recipe_path(@recipe),
     method: :delete, class: "btn btn-default" %>

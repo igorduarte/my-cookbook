@@ -32,15 +32,21 @@
      </div>
    </div>
    <div class="row">
-     <div class="form-group col-md-2">
+     <div class="form-group col-md-3">
        <%= f.label :ingredients %>
        <%= f.text_area :ingredients, class: "form-control" %>
      </div>
    </div>
    <div class="row">
-     <div class="form-group col-md-2">
+     <div class="form-group col-md-3">
        <%= f.label :method %>
        <%= f.text_area :method, class: "form-control" %>
+     </div>
+   </div>
+   <div class="row">
+     <div class="form-group col-md-3">
+       <%= f.label :image, 'Insira uma foto da receita' %>
+       <%= f.file_field :image, as: :file, class: "form-control" %>
      </div>
    </div>
    <%= link_to "Voltar", root_path, class: "btn btn-default" %>

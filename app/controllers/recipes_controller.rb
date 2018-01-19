@@ -17,8 +17,10 @@ class RecipesController < ApplicationController
   end
 
   def edit
-    flash[:notice] = 'Você não tem permissão para editar essa receita'
-    redirect_to root_path unless current_user.author?(@recipe)
+    unless current_user.author?(@recipe)
+      flash[:notice] = 'Você não tem permissão para editar essa receita'
+      redirect_to root_path
+    end
   end
 
   def create
@@ -86,7 +88,7 @@ class RecipesController < ApplicationController
 
   def recipe_params
     params.require(:recipe).permit(:title, :difficulty, :cook_time,
-      :ingredients, :method, :favorite, :recipe_type_id, :cuisine_id, :user_id)
+      :ingredients, :method, :favorite, :recipe_type_id, :cuisine_id, :user_id, :image)
   end
 
   def set_recipe

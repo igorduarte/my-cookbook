@@ -9,7 +9,7 @@ feature 'Visitor register recipe' do
     create :recipe_type, name: 'Sobremesa'
 
     user = create :user
-    login_as user, scope: :user
+    login_as user
     # simula a ação do usuário
     visit root_path
     click_on 'Enviar uma receita'
@@ -39,7 +39,7 @@ feature 'Visitor register recipe' do
     #cria os dados necessários, nesse caso não vamos criar dados no banco
     create :cuisine, name: 'Arabe'
     user = create :user
-    login_as user, scope: :user
+    login_as user
     # simula a ação do usuário
     visit root_path
     click_on 'Enviar uma receita'
@@ -70,5 +70,20 @@ feature 'Visitor register recipe' do
 
     expect(current_path).to eq new_user_session_path
     expect(page).to have_content :unauthenticated
+  end
+
+  scenario 'and can add an image to recipe' do
+    user = create :user
+    cuisine = create :cuisine, name: 'Arabe'
+    recipe_type = create :recipe_type, name: 'Entrada'
+    recipe = create :recipe, title: 'Tabule', cuisine: cuisine,
+      recipe_type: recipe_type, user: user
+
+    login_as user
+
+    visit root_path
+    click_on recipe.title
+
+    # expect(page).to
   end
 end
