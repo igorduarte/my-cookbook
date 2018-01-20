@@ -2,9 +2,9 @@ FactoryBot.define do
   factory :recipe do
     title 'Paella'
     difficulty 'Média'
-    ingredients 'Farinha, açúcar, cenoura'
+    ingredients 'Arroz e Frutos do mar'
     cook_time 60
-    add_attribute(:method) { 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes' }
+    add_attribute(:method) { 'Cozinhe o arroz e misture com o restante dos ingredientes' }
     recipe_type
     cuisine
     user

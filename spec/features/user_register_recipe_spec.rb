@@ -83,7 +83,10 @@ feature 'Visitor register recipe' do
 
     visit root_path
     click_on recipe.title
+    click_on 'Editar'
+    page.attach_file(:recipe_image, './spec//support/fixtures/recipe_image.png')
+    click_on 'Enviar'
 
-    # expect(page).to
+    expect(page).to have_css "img[src*='recipe_image.png']"
   end
 end

@@ -21,8 +21,8 @@ feature 'Visitor sends a recipe to a friend via e-mail' do
     mail = ActionMailer::Base.deliveries.last
     expect(mail.to).to include friend_email
     expect(mail.subject).to eq 'Compartilharam uma receita com você :)'
-    # expect(mail.body).to include 'Olhe essa receita!'
-    # expect(mail.body).to include recipe_url(recipe, host: 'localhost:3000')
+    expect(mail.body).to include 'Olhe essa receita!'
+    expect(mail.body).to include recipe_url(recipe, host: 'localhost:3000')
 
   end
 end
