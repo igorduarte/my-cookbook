@@ -2,6 +2,8 @@ require 'rails_helper'
 
 feature 'User register recipe_type' do
   scenario 'successfully' do
+    user = create :user
+    login_as user
 
     visit new_recipe_type_path
     fill_in 'Nome', with: 'Sobremesa'
@@ -12,6 +14,9 @@ feature 'User register recipe_type' do
   end
 
   scenario 'and must fill in name' do
+    user = create :user
+    login_as user
+    
     visit new_recipe_type_path
     fill_in 'Nome', with: ''
     click_on 'Enviar'

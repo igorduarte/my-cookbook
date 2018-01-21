@@ -1,4 +1,5 @@
 class RecipeTypesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
 
   def show
     @recipe_type = RecipeType.find(params[:id])

@@ -2,6 +2,8 @@ require 'rails_helper'
 
 feature 'User register cuisine' do
   scenario 'successfully' do
+    user = create :user
+    login_as user
 
     visit new_cuisine_path
     fill_in 'Nome', with: 'Brasileira'
@@ -12,6 +14,9 @@ feature 'User register cuisine' do
   end
 
   scenario 'and must fill in name' do
+    user = create :user
+    login_as user
+
     visit new_cuisine_path
     fill_in 'Nome', with: ''
     click_on 'Enviar'
@@ -20,7 +25,10 @@ feature 'User register cuisine' do
   end
 
   scenario 'do not accept duplicate cuisines' do
-    Cuisine.create(name: 'Brasileira')
+    user = create :user
+    login_as user
+
+    create :cuisine, name: 'Brasileira'
 
     visit new_cuisine_path
     fill_in 'Nome', with: 'Brasileira'
