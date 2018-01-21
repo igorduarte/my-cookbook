@@ -7,3 +7,7 @@
 <% @cuisines.each do |cuisine| %>
   <li class="nav"><%= link_to cuisine.name, cuisine_path(cuisine.id)%></li>
 <% end %>
+
+<hr>
+
+<span><%= link_to 'Ver todas as receitas', recipes_path %></span>

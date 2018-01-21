@@ -91,4 +91,40 @@ feature 'Visitor visit homepage' do
     expect(page).to have_link recipes[0].title
     expect(page).to have_link recipes[9].title
   end
+
+  scenario 'and see 3 most favorited recipes' do
+    users = create_list :user, 3
+    cuisine = create :cuisine
+    type = create :recipe_type
+
+    most_favorite_recipe = create :recipe, title: 'Feijoada', user: users[0],
+      cuisine: cuisine, recipe_type: type
+    second_favorite_recipe = create :recipe, title: 'Miojo', user: users[0],
+      cuisine: cuisine, recipe_type: type
+    less_favorite_recipe = create :recipe, title: 'Churrasco', user: users[0],
+      cuisine: cuisine, recipe_type: type
+
+    no_favorited_recipe = create :recipe, title: 'Picolé de chuchu', user: users[0],
+      cuisine: cuisine, recipe_type: type
+
+
+    most_favorite = create_list :favorite, 3, recipe: most_favorite_recipe, user: users[0]
+    second_most_favorite = create_list :favorite, 2, recipe: second_favorite_recipe, user: users[0]
+    less_favorite = create_list :favorite, 1, recipe: less_favorite_recipe, user: users[0]
+
+    visit root_path
+
+    expect(page).to have_css 'div.col-md-12.col-xs-2.favorites', count: 3
+    expect(page).to have_link most_favorite_recipe.title
+    expect(page).to have_link less_favorite_recipe.title
+    expect(page).to have_link second_favorite_recipe.title
+    expect(page).not_to have_css 'section.col-md-5.favorites', text: no_favorited_recipe.title
+    expect(page).not_to have_css 'div.col-md-12.col-xs-2.favorites', count: 4
+
+  end
 end
+
+
+
+
+

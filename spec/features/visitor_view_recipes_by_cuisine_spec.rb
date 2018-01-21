@@ -74,6 +74,6 @@ feature 'Visitor view recipes by cuisine' do
 
     # expectativas do usuário após a ação
     expect(page).not_to have_content(recipe.title)
-    expect(page).to have_content('Nenhuma receita encontrada para este tipo de cozinha')
+    expect(page).to have_content('Nenhuma receita encontrada para este tipo de Cozinha')
   end
 end

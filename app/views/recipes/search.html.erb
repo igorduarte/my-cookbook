@@ -1,7 +1,9 @@
-<h2>Resultado da busca por <%= @search_term %></h2>
-<p><%= flash[:error] %></p>
-<% @recipes.each do |recipe| %>
-  <div class="recipes">
-    <%= render recipe %>
-  </div>
-<% end %>
+<section class="col-md-5">
+  <h2>Resultado da busca por <%= @search_term %></h2>
+  <p><%= flash[:error] %></p>
+  <% @recipes.each do |recipe| %>
+    <div class="col-md-12 col-xs-2 recipes">
+      <%= render recipe %>
+    </div>
+  <% end %>
+</section>

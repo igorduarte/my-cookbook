@@ -1,0 +1,19 @@
+<section class="col-md-5 recent">
+  <h2>Últimas Receitas</h2>
+
+  <% @recipes.each do |recipe| %>
+    <div class="col-md-12 col-xs-2">
+      <%= render recipe %>
+    </div>
+  <% end %>
+</section>
+
+<section class="col-md-5 favorites">
+  <h2>Favoritas dos usuários</h2>
+
+  <% @favorited_recipes.each do |recipe| %>
+    <div class="col-md-12 col-xs-2 favorites">
+      <%= render recipe %>
+    </div>
+  <% end %>
+</section>

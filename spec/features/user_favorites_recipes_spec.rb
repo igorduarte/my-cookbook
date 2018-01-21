@@ -23,8 +23,8 @@ feature 'User favorites recipes' do
 
     login_as another_user
 
-    visit root_path
-    click_on recipe.title
+    visit recipe_path(recipe)
+    # click_on recipe.title
     click_on 'Favoritar Receita'
 
     expect(page).to have_content('Receita adicionada aos favoritos')
@@ -37,8 +37,7 @@ feature 'User favorites recipes' do
     create :favorite, user: user, recipe: recipe
 
     login_as user
-    visit root_path
-    click_on recipe.title
+    visit recipe_path(recipe)
     click_on 'Remover dos favoritos'
 
     expect(page).to have_content 'Receita removida dos favoritos'

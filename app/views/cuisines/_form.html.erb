@@ -3,10 +3,13 @@
   <div class="form-group col-md-2">
     <%= f.label :name %>
     <%= f.text_field :name, class: "form-control" %>
+    <br>
+    <%= link_to "Voltar", root_path, class: "btn btn-default" %>
+    <%= f.submit 'Enviar', class: "btn btn-primary" %><br>
   </div>
+
 </div>
-<%= link_to "Voltar", root_path, class: "btn btn-default" %>
-<%= f.submit 'Enviar', class: "btn btn-primary" %><br>
+
 <% end %>
 <br>
 <%= flash[:error] %>

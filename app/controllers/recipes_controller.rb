@@ -2,8 +2,6 @@ class RecipesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_recipe, only: [:show, :edit, :update, :destroy, :favorite,
     :unfavorite, :share]
-  before_action :set_cuisines, only: [:index, :new, :edit]
-  before_action :set_types, only: [:index, :new, :edit]
 
   def index
     @recipes = Recipe.all
@@ -79,6 +77,7 @@ class RecipesController < ApplicationController
     @message = params[:message]
 
     RecipesMailer.share(@email, @message, @recipe.id).deliver_now
+
     flash[:notice] = "Receita enviada para #{@email}"
     redirect_to @recipe
   end
@@ -92,14 +91,6 @@ class RecipesController < ApplicationController
   end
 
   def set_recipe
-    @recipe = Recipe.find(params[:id])
-  end
-
-  def set_cuisines
-    @cuisines = Cuisine.all
-  end
-
-  def set_types
-    @recipe_types = RecipeType.all
+    @recipe ||= Recipe.find(params[:id])
   end
 end
