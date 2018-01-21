@@ -9,6 +9,7 @@
     <li>Cozinha: <%= recipe.cuisine.name %></li>
     <li>Dificuldade: <%= recipe.difficulty %></li>
     <li>Tempo de preparo: <%= recipe.cook_time %> minutos</li>
+    <li><%= 'Favoritada ' + pluralize(recipe.favorites.count, 'vez', 'vezes') unless recipe.favorites.count < 1 %></li>
   </ul>
 </div>
 
