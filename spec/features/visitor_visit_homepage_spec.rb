@@ -122,6 +122,20 @@ feature 'Visitor visit homepage' do
     expect(page).not_to have_css 'div.col-md-12.col-xs-2.favorites', count: 4
 
   end
+
+  scenario 'and see highlighted recipes' do
+      user = create :user
+      cuisine = create :cuisine, name: 'Arabe'
+      recipe_type = create :recipe_type, name: 'Entrada'
+      recipe = create :recipe, title: 'Tabule', cuisine: cuisine,
+        recipe_type: recipe_type, user: user, star: true
+
+      login_as user
+
+      visit root_path
+
+      expect(page).to have_css %{img[src*='/assets/star-0582542e7338ffe28bc07bcd06e2a047d529743295cb753916c435368db3838b.png']}
+  end
 end
 
 

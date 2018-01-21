@@ -89,4 +89,40 @@ feature 'Visitor register recipe' do
 
     expect(page).to have_css "img[src*='recipe_image.png']"
   end
+
+  scenario 'and can put a star on it' do
+    user = create :user
+    cuisine = create :cuisine, name: 'Arabe'
+    recipe_type = create :recipe_type, name: 'Entrada'
+    recipe = create :recipe, title: 'Tabule', cuisine: cuisine,
+      recipe_type: recipe_type, user: user
+
+    login_as user
+
+    visit root_path
+    click_on 'Enviar uma receita'
+
+    fill_in 'Título', with: 'Tabule'
+    check 'recipe_star'
+    select 'Arabe', from: 'Cozinha'
+    select 'Entrada', from: 'Tipo da Receita'
+    fill_in 'Dificuldade', with: 'Fácil'
+    fill_in 'Tempo de Preparo', with: '45'
+    fill_in 'Ingredientes', with: 'Trigo para quibe, cebola, tomate picado, azeite, salsinha'
+    fill_in 'Como Preparar', with: 'Misturar tudo e servir. Adicione limão a gosto.'
+    click_on 'Enviar'
+
+    expect(page).to have_css('h1', text: 'Tabule')
+    expect(page).to have_css %{img[src*='/assets/star-0582542e7338ffe28bc07bcd06e2a047d529743295cb753916c435368db3838b.png']}
+    expect(page).to have_css('h3', text: 'Detalhes')
+    expect(page).to have_css('p', text: 'Entrada')
+    expect(page).to have_css('p', text: 'Arabe')
+    expect(page).to have_css('p', text: 'Fácil')
+    expect(page).to have_css('p', text: "45 minutos")
+    expect(page).to have_css('h3', text: 'Ingredientes')
+    expect(page).to have_css('p', text: 'Trigo para quibe, cebola, tomate picado, azeite, salsinha')
+    expect(page).to have_css('h3', text: 'Como Preparar')
+    expect(page).to have_css('p', text:  'Misturar tudo e servir. Adicione limão a gosto.')
+
+  end
 end

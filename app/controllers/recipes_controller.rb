@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
     :unfavorite, :share]
 
   def index
-    @recipes = Recipe.all
+    @recipes ||= Recipe.all
   end
 
   def show
@@ -87,7 +87,8 @@ class RecipesController < ApplicationController
 
   def recipe_params
     params.require(:recipe).permit(:title, :difficulty, :cook_time,
-      :ingredients, :method, :favorite, :recipe_type_id, :cuisine_id, :user_id, :image)
+      :ingredients, :method, :favorite, :recipe_type_id, :cuisine_id, :user_id,
+      :image, :star)
   end
 
   def set_recipe

@@ -1,4 +1,4 @@
-<h1><%= link_to(recipe.title, recipe) %></h1>
+<h1><%= link_to(recipe.title, recipe) %><%= image_tag("star.png", size: "32x32", alt: "Destaque") if recipe.star? %></h1>
 <div class="col-md-6">
   <%= link_to image_tag(recipe.image.url(:medium), class: "img-thumbnail"), recipe %>
 </div>

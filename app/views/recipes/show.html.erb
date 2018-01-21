@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-4">
-    <h1><%= @recipe.title %></h1>
+    <h1><%= @recipe.title %><%= image_tag("star.png", size: "32x32", alt: "Destaque") if @recipe.star? %></h1>
     <%= image_tag @recipe.image.url(:medium), class: "img-thumbnail" %>
     <br>
     <br>
@@ -33,7 +33,7 @@
     <p><strong>Autor: </strong><%= @recipe.user.name %></p>
 
     <h3>Compartilhe essa receita com um amigo :)</h3>
-    
+
     <%= form_tag share_recipe_path method: :post do %>
       <div class="row">
         <div class="form-group col-md-12">
