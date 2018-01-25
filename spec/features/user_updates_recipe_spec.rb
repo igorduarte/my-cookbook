@@ -4,11 +4,11 @@ feature 'User updates recipe' do
   scenario 'successfully' do
     #cria os dados necessários
     arabian_cuisine = create :cuisine, name: 'Arabe'
-    brazilian_cuisine = create :cuisine, name: 'Brasileira'
+    create :cuisine, name: 'Brasileira'
 
-    appetizer_type = create :recipe_type, name: 'Entrada'
+    create :recipe_type, name: 'Entrada'
     main_type = create :recipe_type, name: 'Prato Principal'
-    dessert_type = create :recipe_type, name: 'Sobremesa'
+    create :recipe_type, name: 'Sobremesa'
 
     user = create :user
 
@@ -31,7 +31,8 @@ feature 'User updates recipe' do
     select 'Sobremesa', from: 'Tipo da Receita'
     fill_in 'Dificuldade', with: 'Médio'
     fill_in 'Tempo de Preparo', with: '45'
-    fill_in 'Ingredientes', with: 'Cenoura, farinha, ovo, oleo de soja e chocolate'
+    fill_in 'Ingredientes', with:
+    'Cenoura, farinha, ovo, oleo de soja e chocolate'
     fill_in 'Como Preparar', with: 'Faça um bolo e uma cobertura de chocolate'
 
     click_on 'Enviar'
@@ -42,18 +43,20 @@ feature 'User updates recipe' do
     expect(page).to have_css('p', text: 'Brasileira')
     expect(page).to have_css('p', text: 'Médio')
     expect(page).to have_css('p', text: '45 minutos')
-    expect(page).to have_css('p', text:  'Cenoura, farinha, ovo, oleo de soja e chocolate')
-    expect(page).to have_css('p', text: 'Faça um bolo e uma cobertura de chocolate')
+    expect(page).to have_css('p', text:
+      'Cenoura, farinha, ovo, oleo de soja e chocolate')
+    expect(page).to have_css('p', text:
+      'Faça um bolo e uma cobertura de chocolate')
   end
 
   scenario 'and all fields must be filled' do
     #cria os dados necessários, nesse caso não vamos criar dados no banco
-    arabian_cuisine = create :cuisine, name: 'Arabe'
+    create :cuisine, name: 'Arabe'
     brazilian_cuisine = create :cuisine, name: 'Brasileira'
 
-    appetizer_type = create :recipe_type, name: 'Entrada'
+    create :recipe_type, name: 'Entrada'
     main_type = create :recipe_type, name: 'Prato Principal'
-    dessert_type = create :recipe_type, name: 'Sobremesa'
+    create :recipe_type, name: 'Sobremesa'
 
     user = create :user
 
@@ -108,7 +111,7 @@ feature 'User updates recipe' do
       click_on recipe.title
 
       expect(page).not_to have_link 'Editar'
-    end
+  end
 
     scenario 'and must be the owner of recipe (via URI)' do
       user = create :user

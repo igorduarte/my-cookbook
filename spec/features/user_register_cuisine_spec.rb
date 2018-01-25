@@ -10,7 +10,8 @@ feature 'User register cuisine' do
     click_on 'Enviar'
 
     expect(page).to have_css('h1', text: 'Brasileira')
-    expect(page).to have_content('Nenhuma receita encontrada para este tipo de Cozinha')
+    expect(page).to have_content
+      'Nenhuma receita encontrada para este tipo de Cozinha'
   end
 
   scenario 'and must fill in name' do

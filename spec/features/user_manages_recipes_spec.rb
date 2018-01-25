@@ -5,7 +5,8 @@ feature 'User manages his recipes' do
     user = create :user
     cuisine = create :cuisine
     recipe_type = create :recipe_type
-    recipe = create :recipe, recipe_type: recipe_type, cuisine: cuisine, user: user
+    recipe = create :recipe, recipe_type: recipe_type, cuisine: cuisine,
+      user: user
 
     logout user
 
@@ -21,8 +22,10 @@ feature 'User manages his recipes' do
     recipe_type = create :recipe_type
     billy = create :user, name: 'Billy'
     sally = create :user, name: 'Sally'
-    billy_recipe = create :recipe, recipe_type: recipe_type, cuisine: cuisine, user: billy
-    sally_recipe = create :recipe, recipe_type: recipe_type, cuisine: cuisine, user: sally
+    create :recipe, recipe_type: recipe_type, cuisine: cuisine,
+      user: billy
+    sally_recipe = create :recipe, recipe_type: recipe_type, cuisine: cuisine,
+      user: sally
 
     login_as billy
 
@@ -37,7 +40,8 @@ feature 'User manages his recipes' do
     billy = create :user, name: 'Billy'
     sally = create :user, name: 'Sally'
 
-    sally_recipe = create :recipe, recipe_type: recipe_type, cuisine: cuisine, user: sally
+    sally_recipe = create :recipe, recipe_type: recipe_type, cuisine: cuisine,
+      user: sally
 
     login_as billy
 

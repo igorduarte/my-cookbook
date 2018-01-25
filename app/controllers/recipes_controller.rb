@@ -1,7 +1,8 @@
 class RecipesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :favorite,
-    :unfavorite, :share]
+  before_action :authenticate_user!,
+    only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_recipe,
+    only: [:show, :edit, :update, :destroy, :favorite, :unfavorite, :share]
 
   def index
     @recipes ||= Recipe.all
@@ -52,9 +53,12 @@ class RecipesController < ApplicationController
   def search
     @search_term = params[:term]
     search_term_query = "%#{@search_term}%"
-    @recipes = Recipe.where("title LIKE ? OR ingredients LIKE ?", search_term_query, search_term_query)
-
-    flash[:error] = "Nenhuma receita encontrada com o termo #{@search_term}" unless @recipes.any?
+    @recipes = Recipe.where("title LIKE ? OR ingredients LIKE ?",
+      search_term_query, search_term_query)
+      
+    unless @recipes.any?
+      flash[:error] = "Nenhuma receita encontrada com o termo #{@search_term}"
+    end
   end
 
   def favorite
@@ -87,7 +91,7 @@ class RecipesController < ApplicationController
 
   def recipe_params
     params.require(:recipe).permit(:title, :difficulty, :cook_time,
-      :ingredients, :method, :favorite, :recipe_type_id, :cuisine_id, :user_id,
+      :ingredients, :method, :recipe_type_id, :cuisine_id, :user_id,
       :image, :star)
   end
 

@@ -5,7 +5,7 @@ feature 'Visitor search for recipes' do
     # cria os dados necessários previamente
     cuisine = create :cuisine
     recipe_type = create :recipe_type
-    another_recipe_type = create :recipe_type, name: 'Entrada'
+    create :recipe_type, name: 'Entrada'
     recipe = create :recipe, cuisine: cuisine, recipe_type: recipe_type
     another_recipe = create :recipe, title: 'Salada de cenoura',
       cuisine: cuisine, recipe_type: recipe_type
@@ -16,7 +16,8 @@ feature 'Visitor search for recipes' do
     click_on 'Buscar'
 
     # expectativas do usuário após a ação
-    expect(page).to have_css('h2', text: "Resultado da busca por #{recipe.title}")
+    expect(page).to have_css('h2', text:
+      "Resultado da busca por #{recipe.title}")
     expect(page).to have_css('h1', text: recipe.title)
     expect(page).to have_css('li', text: recipe.recipe_type.name)
     expect(page).to have_css('li', text: recipe.cuisine.name)
@@ -58,7 +59,8 @@ feature 'Visitor search for recipes' do
     fill_in 'search', with: recipe.title
     click_on 'Buscar'
 
-    expect(page).to have_css('h2', text: "Resultado da busca por #{recipe.title}")
+    expect(page).to have_css('h2', text:
+      "Resultado da busca por #{recipe.title}")
     expect(page).to have_css('h1', text: recipe.title)
     expect(page).not_to have_css('h1', text: another_recipe.title)
   end
@@ -84,7 +86,8 @@ feature 'Visitor search for recipes' do
     fill_in 'search', with: search_term
     click_on 'Buscar'
 
-    expect(page).to have_css('h2', text: "Resultado da busca por #{search_term}")
+    expect(page).to have_css('h2', text:
+      "Resultado da busca por #{search_term}")
     expect(page).to have_css('h1', text: recipe.title)
     # expect(page).to have_css('p', text: recipe.ingredients)
     expect(page).to have_css('h1', text: another_recipe.title)
@@ -96,11 +99,11 @@ feature 'Visitor search for recipes' do
   scenario 'and does not find any recipe' do
     cuisine = create :cuisine
     recipe_type = create :recipe_type
-    recipe = create :recipe, title: 'Bolo de cenoura',
+    create :recipe, title: 'Bolo de cenoura',
       ingredients: 'Farinha, açucar, cenoura e chocolate',
       cuisine: cuisine, recipe_type: recipe_type
 
-    another_recipe = create :recipe, title: 'Pavê de chocolate',
+    create :recipe, title: 'Pavê de chocolate',
       ingredients: 'Cacau, bolacha e açucar',
       cuisine: cuisine, recipe_type: recipe_type
 
@@ -110,7 +113,8 @@ feature 'Visitor search for recipes' do
     fill_in 'search', with: search_term
     click_on 'Buscar'
 
-    expect(page).to have_css('p', text: "Nenhuma receita encontrada com o termo #{search_term}")
+    expect(page).to have_css('p', text:
+      "Nenhuma receita encontrada com o termo #{search_term}")
     expect(page).to have_css('div.recipes', count: 0 )
-   end
+  end
 end

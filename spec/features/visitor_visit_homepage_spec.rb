@@ -5,7 +5,8 @@ feature 'Visitor visit homepage' do
     visit root_path
 
     expect(page).to have_css('h1', text: 'CookBook')
-    expect(page).to have_css('p', text: 'Bem-vindo ao maior livro de receitas online')
+    expect(page)
+      .to have_css('p', text: 'Bem-vindo ao maior livro de receitas online')
   end
 
   scenario 'and view recipe' do
@@ -104,13 +105,13 @@ feature 'Visitor visit homepage' do
     less_favorite_recipe = create :recipe, title: 'Churrasco', user: users[0],
       cuisine: cuisine, recipe_type: type
 
-    no_favorited_recipe = create :recipe, title: 'Picolé de chuchu', user: users[0],
-      cuisine: cuisine, recipe_type: type
+    no_favorited_recipe = create :recipe, title: 'Picolé de chuchu',
+    user: users[0], cuisine: cuisine, recipe_type: type
 
 
-    most_favorite = create_list :favorite, 3, recipe: most_favorite_recipe, user: users[0]
-    second_most_favorite = create_list :favorite, 2, recipe: second_favorite_recipe, user: users[0]
-    less_favorite = create_list :favorite, 1, recipe: less_favorite_recipe, user: users[0]
+    create_list :favorite, 3, recipe: most_favorite_recipe, user: users[0]
+    create_list :favorite, 2, recipe: second_favorite_recipe, user: users[0]
+    create_list :favorite, 1, recipe: less_favorite_recipe, user: users[0]
 
     visit root_path
 
@@ -118,7 +119,8 @@ feature 'Visitor visit homepage' do
     expect(page).to have_link most_favorite_recipe.title
     expect(page).to have_link less_favorite_recipe.title
     expect(page).to have_link second_favorite_recipe.title
-    expect(page).not_to have_css 'section.col-md-5.favorites', text: no_favorited_recipe.title
+    expect(page).not_to have_css 'section.col-md-5.favorites',
+      text: no_favorited_recipe.title
     expect(page).not_to have_css 'div.col-md-12.col-xs-2.favorites', count: 4
 
   end
@@ -127,18 +129,14 @@ feature 'Visitor visit homepage' do
       user = create :user
       cuisine = create :cuisine, name: 'Arabe'
       recipe_type = create :recipe_type, name: 'Entrada'
-      recipe = create :recipe, title: 'Tabule', cuisine: cuisine,
+      create :recipe, title: 'Tabule', cuisine: cuisine,
         recipe_type: recipe_type, user: user, star: true
 
       login_as user
 
       visit root_path
 
-      expect(page).to have_css %{img[src*='/assets/star-0582542e7338ffe28bc07bcd06e2a047d529743295cb753916c435368db3838b.png']}
+      expect(page).to have_css %{img[src*='/assets/star-0582542e7338ffe28bc
+        07bcd06e2a047d529743295cb753916c435368db3838b.png']}.gsub(/\s+/, "")
   end
 end
-
-
-
-
-

@@ -8,11 +8,11 @@ feature 'Visitor view recipes by cuisine' do
     cuisine = Cuisine.create(name: 'Brasileira')
     recipe_type = RecipeType.create(name: 'Sobremesa')
 
-    recipe = Recipe.create(user: user, title: 'Bolo de cenoura', recipe_type: recipe_type,
-                          cuisine: cuisine, difficulty: 'Médio',
-                          cook_time: 60,
-                          ingredients: 'Farinha, açucar, cenoura',
-                          method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+    recipe = create :recipe, user: user, title: 'Bolo de cenoura',
+      recipe_type: recipe_type, cuisine: cuisine, difficulty: 'Médio',
+      cook_time: 60, ingredients: 'Farinha, açucar, cenoura',
+      method: %{Cozinhe a cenoura, corte em pedaços pequenos,
+        misture com o restante dos ingredientes}
 
     # simula a ação do usuário
     visit root_path
@@ -32,18 +32,20 @@ feature 'Visitor view recipes by cuisine' do
     user = create :user
     brazilian_cuisine = Cuisine.create(name: 'Brasileira')
     dessert_recipe_type = RecipeType.create(name: 'Sobremesa')
-    recipe = Recipe.create(user: user, title: 'Bolo de cenoura', recipe_type: dessert_recipe_type,
-                          cuisine: brazilian_cuisine, difficulty: 'Médio',
-                          cook_time: 60,
-                          ingredients: 'Farinha, açucar, cenoura',
-                          method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+    create :recipe, user: user, title: 'Bolo de cenoura',
+      recipe_type: dessert_recipe_type, cuisine: brazilian_cuisine,
+      difficulty: 'Médio', cook_time: 60,
+      ingredients: 'Farinha, açucar, cenoura',
+      method: %{Cozinhe a cenoura, corte em pedaços pequenos,
+        misture com o restante dos ingredientes}
 
     italian_cuisine = Cuisine.create(name: 'Italiana')
     main_recipe_type = RecipeType.create(name: 'Prato Principal')
-    italian_recipe = Recipe.create(user: user, title: 'Macarrão Carbonara', recipe_type: main_recipe_type,
-                                  cuisine: italian_cuisine, difficulty: 'Difícil',
-                                  cook_time: 30, ingredients: 'Massa, ovos, bacon',
-                                  method: 'Frite o bacon; Cozinhe a massa ate ficar al dent; Misture os ovos e o bacon a massa ainda quente;')
+    italian_recipe = create :recipe, user: user, title: 'Macarrão Carbonara',
+      recipe_type: main_recipe_type, cuisine: italian_cuisine,
+      difficulty: 'Difícil', cook_time: 30, ingredients: 'Massa, ovos, bacon',
+      method: %{Frite o bacon; Cozinhe a massa ate ficar al dent;
+        Misture os ovos e o bacon a massa ainda quente;}
     # simula a ação do usuário
     visit root_path
     click_on italian_cuisine.name
@@ -61,11 +63,11 @@ feature 'Visitor view recipes by cuisine' do
     user = create :user
     brazilian_cuisine = Cuisine.create(name: 'Brasileira')
     recipe_type = RecipeType.create(name: 'Sobremesa')
-    recipe = Recipe.create(user: user, title: 'Bolo de cenoura', recipe_type: recipe_type,
-                          cuisine: brazilian_cuisine, difficulty: 'Médio',
-                          cook_time: 60,
-                          ingredients: 'Farinha, açucar, cenoura',
-                          method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+    recipe = create :recipe, user: user, title: 'Bolo de cenoura',
+      recipe_type: recipe_type, cuisine: brazilian_cuisine, difficulty: 'Médio',
+      cook_time: 60, ingredients: 'Farinha, açucar, cenoura',
+      method: %{Cozinhe a cenoura, corte em pedaços pequenos,
+        misture com o restante dos ingredientes}
 
     italian_cuisine = Cuisine.create(name: 'Italiana')
     # simula a ação do usuário
@@ -74,6 +76,7 @@ feature 'Visitor view recipes by cuisine' do
 
     # expectativas do usuário após a ação
     expect(page).not_to have_content(recipe.title)
-    expect(page).to have_content('Nenhuma receita encontrada para este tipo de Cozinha')
+    expect(page).to have_content
+      'Nenhuma receita encontrada para este tipo de Cozinha'
   end
 end

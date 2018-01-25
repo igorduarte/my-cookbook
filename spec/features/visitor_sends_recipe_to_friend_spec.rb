@@ -10,7 +10,8 @@ feature 'Visitor sends a recipe to a friend via e-mail' do
     fill_in 'Email', with: friend_email
     fill_in 'Mensagem', with: 'Olhe essa receita!'
 
-    expect(RecipesMailer).to receive(:share).with(friend_email, 'Olhe essa receita!', recipe.id).and_call_original
+    expect(RecipesMailer).to receive(:share)
+      .with(friend_email, 'Olhe essa receita!', recipe.id).and_call_original
 
 
 

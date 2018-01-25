@@ -9,7 +9,8 @@ feature 'Visitor view recipe details' do
     recipe = create(:recipe, title: 'Bolo de cenoura', recipe_type: recipe_type,
       cuisine: cuisine, difficulty: 'Médio', cook_time: 60,
       ingredients: 'Farinha, açucar, cenoura',
-      method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes',
+      method: %{Cozinhe a cenoura, corte em pedaços pequenos,
+        misture com o restante dos ingredientes}.gsub(/\s+/, ""),
       user: user)
 
     # simula a ação do usuário
@@ -37,7 +38,8 @@ feature 'Visitor view recipe details' do
     recipe = create(:recipe, title: 'Bolo de cenoura', recipe_type: recipe_type,
       cuisine: cuisine, difficulty: 'Médio', cook_time: 60,
       ingredients: 'Farinha, açucar, cenoura', user: user,
-      method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+      method: %{Cozinhe a cenoura, corte em pedaços pequenos,
+        misture com o restante dos ingredientes})
 
     # simula a ação do usuário
     visit root_path
@@ -53,7 +55,8 @@ feature 'Visitor view recipe details' do
     author = create :user, name: "Angela"
     cuisine = create :cuisine
     recipe_type = create :recipe_type
-    recipe = create :recipe, recipe_type: recipe_type, cuisine: cuisine, user: author
+    recipe = create :recipe, recipe_type: recipe_type, cuisine: cuisine,
+      user: author
 
     login_as user
 
